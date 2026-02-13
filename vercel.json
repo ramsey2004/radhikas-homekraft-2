@@ -1,0 +1,48 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm ci",
+  "framework": "nextjs",
+  "nodeVersion": "20.x",
+  "env": {
+    "NEXTAUTH_SECRET": {
+      "description": "NextAuth.js secret key for session encryption",
+      "required": true
+    },
+    "NEXTAUTH_URL": {
+      "description": "Your application URL (automatically set by Vercel)",
+      "value": "@defined VERCEL_URL"
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB connection string",
+      "required": true
+    },
+    "NEXT_PUBLIC_RAZORPAY_KEY_ID": {
+      "description": "Razorpay public key",
+      "required": false
+    },
+    "RAZORPAY_KEY_SECRET": {
+      "description": "Razorpay secret key",
+      "required": false
+    },
+    "NEXT_PUBLIC_SITE_URL": {
+      "description": "Your production site URL",
+      "required": true
+    },
+    "STRIPE_SECRET_KEY": {
+      "description": "Stripe secret API key",
+      "required": false
+    },
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": {
+      "description": "Stripe publishable key",
+      "required": false
+    }
+  },
+  "regions": ["iad1"],
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 512,
+      "maxDuration": 60
+    }
+  }
+}

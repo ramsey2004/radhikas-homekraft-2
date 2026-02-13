@@ -1,0 +1,42 @@
+# robots.txt for Radhika's Homecraft
+# Allows search engines to crawl specific paths
+
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /categories
+Allow: /blog
+Allow: /about
+Allow: /contact
+Disallow: /admin
+Disallow: /api
+Disallow: /auth
+Disallow: /.env*
+Disallow: /private
+
+# Product pages are crawlable
+Allow: /products/*
+Allow: /product/*
+
+# Cart and checkout are private
+Disallow: /cart
+Disallow: /checkout
+Disallow: /orders
+Disallow: /account
+
+# Prevent crawling of unnecessary paths
+Disallow: /_next
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# Sitemap location
+Sitemap: https://radhikashomecraft.com/sitemap.xml
+Sitemap: https://radhikashomecraft.com/sitemap-products.xml
+
+# Crawl delay to prevent overloading the server
+Crawl-delay: 1
+
+# Request rate
+Request-rate: 30/1m

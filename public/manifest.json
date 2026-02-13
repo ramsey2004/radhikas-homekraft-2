@@ -1,0 +1,154 @@
+{
+  "name": "Radhika's Homecraft - Traditional Indian Handicrafts",
+  "short_name": "Radhika's Homecraft",
+  "description": "Experience the soul of tradition woven into every print. Authentic Indian handicrafts - textiles, rugs, wall art & home decor from Jaipur",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#C85A3A",
+  "categories": ["shopping", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-544x720.png",
+      "type": "image/png",
+      "sizes": "544x720",
+      "form_factor": "narrow",
+      "purpose": "any"
+    },
+    {
+      "src": "/screenshots/screenshot-1280x720.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "purpose": "any"
+    },
+    {
+      "src": "/screenshots/screenshot-maskable-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Textiles",
+      "short_name": "Textiles",
+      "description": "Browse our collection of handcrafted textiles",
+      "url": "/shop?category=textiles",
+      "icons": [
+        {
+          "src": "/icons/textiles-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Shop Wall Art",
+      "short_name": "Wall Art",
+      "description": "Explore decorative wall art pieces",
+      "url": "/shop?category=wall-art",
+      "icons": [
+        {
+          "src": "/icons/wall-art-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "View Wishlist",
+      "short_name": "Wishlist",
+      "description": "View your saved wishlist items",
+      "url": "/wishlist",
+      "icons": [
+        {
+          "src": "/icons/wishlist-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "image",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "permissions": ["notifications", "storage"],
+  "iarc_rating_id": "e84b9d60-71ba-4474-9966-abc123456789"
+}
