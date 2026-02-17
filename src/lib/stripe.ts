@@ -3,11 +3,6 @@
  * Provides payment processing with real Stripe integration
  */
 
-interface StripeConfig {
-  publishableKey: string;
-  secretKey: string;
-}
-
 interface CreatePaymentIntentParams {
   amount: number;
   currency: string;
@@ -280,7 +275,7 @@ export const paymentUtils = {
  */
 export class MockStripeService {
   async createPaymentIntent(
-    params: CreatePaymentIntentParams
+    _params: CreatePaymentIntentParams
   ): Promise<{ clientSecret: string }> {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -291,7 +286,7 @@ export class MockStripeService {
     });
   }
 
-  async processPayment(params: ProcessPaymentParams): Promise<PaymentResult> {
+  async processPayment(_params: ProcessPaymentParams): Promise<PaymentResult> {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -303,7 +298,7 @@ export class MockStripeService {
     });
   }
 
-  async confirmCardPayment(clientSecret: string, paymentMethodId: string): Promise<any> {
+  async confirmCardPayment(clientSecret: string, _paymentMethodId: string): Promise<any> {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -314,14 +309,14 @@ export class MockStripeService {
     });
   }
 
-  async getPaymentStatus(paymentIntentId: string): Promise<{ status: string; amount: number }> {
+  async getPaymentStatus(_paymentIntentId: string): Promise<{ status: string; amount: number }> {
     return {
       status: 'succeeded',
       amount: 5000,
     };
   }
 
-  async refundPayment(paymentIntentId: string): Promise<{ refundId: string }> {
+  async refundPayment(_paymentIntentId: string): Promise<{ refundId: string }> {
     return {
       refundId: `ref_${Date.now()}`,
     };
