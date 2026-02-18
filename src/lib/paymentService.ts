@@ -4,16 +4,47 @@ import { createHmac } from 'crypto';
 
 export type PaymentGateway = 'razorpay' | 'stripe';
 
-// Initialize Razorpay
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || '',
-  key_secret: process.env.RAZORPAY_KEY_SECRET || '',
-});
+// Initialize Razorpay with error handling for missing keys
+let razorpay: ReturnType<typeof initializeRazorpay> | null = null;
+function initializeRazorpay() {
+  try {
+    return new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID || '',
+      key_secret: process.env.RAZORPAY_KEY_SECRET || '',
+    });
+  } catch (error) {
+    console.warn('Razorpay initialization warning:', error);
+    return null;
+  }
+}
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2023-10-16',
-});
+// Initialize Stripe with error handling for missing keys
+let stripe: InstanceType<typeof Stripe> | null = null;
+function initializeStripe() {
+  try {
+    return new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+      apiVersion: '2023-10-16',
+    });
+  } catch (error) {
+    console.warn('Stripe initialization warning:', error);
+    return null;
+  }
+}
+
+// Lazy initialize on first use
+function getRazorpay() {
+  if (!razorpay) {
+    razorpay = initializeRazorpay();
+  }
+  return razorpay;
+}
+
+function getStripe() {
+  if (!stripe) {
+    stripe = initializeStripe();
+  }
+  return stripe;
+}
 
 export async function createRazorpayOrder(
   amount: number,
@@ -22,7 +53,15 @@ export async function createRazorpayOrder(
   notes?: Record<string, string>
 ) {
   try {
-    const order = await razorpay.orders.create({
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return {
+        success: false,
+        error: 'Razorpay is not configured',
+      };
+    }
+
+    const order = await razorpayClient.orders.create({
       amount: Math.round(amount * 100), // Convert to paise
       currency,
       receipt,
@@ -53,6 +92,14 @@ export async function verifyRazorpayPayment(
   signature: string
 ) {
   try {
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return {
+        success: false,
+        error: 'Razorpay is not configured',
+      };
+    }
+
     const hmac = createHmac('sha256', process.env.RAZORPAY_KEY_SECRET as string);
     hmac.update(`${orderId}|${paymentId}`);
     const generatedSignature = hmac.digest('hex');
@@ -67,7 +114,7 @@ export async function verifyRazorpayPayment(
     }
 
     // Fetch payment details for confirmation
-    const payment = await razorpay.payments.fetch(paymentId) as any;
+    const payment = await razorpayClient.payments.fetch(paymentId) as any;
 
     return {
       success: true,
@@ -94,7 +141,15 @@ export async function createStripePaymentIntent(
   metadata?: Record<string, string>
 ) {
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const paymentIntent = await stripeClient.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to smallest currency unit
       currency: currency.toLowerCase(),
       metadata,
@@ -123,7 +178,15 @@ export async function createStripePaymentIntent(
 
 export async function retrieveStripePaymentIntent(paymentIntentId: string) {
   try {
-    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const paymentIntent = await stripeClient.paymentIntents.retrieve(paymentIntentId);
 
     return {
       success: true,
@@ -149,7 +212,15 @@ export async function handleStripeWebhook(
   signature: string
 ): Promise<{ success: boolean; event?: any; error?: string }> {
   try {
-    const event = stripe.webhooks.constructEvent(
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const event = stripeClient.webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET || ''
