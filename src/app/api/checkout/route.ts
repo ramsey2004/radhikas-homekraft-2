@@ -6,6 +6,9 @@ import { createRazorpayOrder, createStripePaymentIntent } from '@/lib/payment';
 import { sendEmail } from '@/lib/email';
 import { z } from 'zod';
 
+// Force dynamic rendering to skip payment initialization during build
+export const dynamic = 'force-dynamic';
+
 const checkoutSchema = z.object({
   items: z.array(
     z.object({

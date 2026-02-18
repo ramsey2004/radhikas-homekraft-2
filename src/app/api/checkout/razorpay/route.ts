@@ -4,6 +4,9 @@ import {
   verifyRazorpayPayment,
 } from '@/lib/payments';
 
+// Force dynamic rendering to skip payment initialization during build
+export const dynamic = 'force-dynamic';
+
 /**
  * Razorpay Checkout API
  * POST /api/checkout/razorpay/init - Initialize Razorpay order
