@@ -2,21 +2,52 @@ import Razorpay from 'razorpay';
 import Stripe from 'stripe';
 import { createHmac } from 'crypto';
 
-// Initialize Razorpay
-export const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || '',
-  key_secret: process.env.RAZORPAY_KEY_SECRET || '',
-});
+// Lazy initialize Razorpay on first use
+let razorpay: Razorpay | null = null;
+function getRazorpay(): Razorpay | null {
+  if (!razorpay && process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+    try {
+      razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+      });
+    } catch (error) {
+      console.warn('Razorpay initialization warning:', error);
+    }
+  }
+  return razorpay;
+}
 
-// Initialize Stripe
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2023-10-16',
-});
+// Lazy initialize Stripe on first use
+let stripe: Stripe | null = null;
+function getStripe(): Stripe | null {
+  if (!stripe && process.env.STRIPE_SECRET_KEY) {
+    try {
+      stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2023-10-16',
+      });
+    } catch (error) {
+      console.warn('Stripe initialization warning:', error);
+    }
+  }
+  return stripe;
+}
+
+// Export getters for backward compatibility
+export { getRazorpay as razorpay, getStripe as stripe };
 
 // Razorpay payment creation
 export async function createRazorpayOrder(amount: number, orderId: string) {
   try {
-    const order = await razorpay.orders.create({
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return {
+        success: false,
+        error: 'Razorpay is not configured',
+      };
+    }
+
+    const order = await razorpayClient.orders.create({
       amount: Math.round(amount * 100), // Convert to paise
       currency: 'INR',
       receipt: orderId,
@@ -45,6 +76,14 @@ export async function verifyRazorpayPayment(
   signature: string
 ) {
   try {
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return {
+        success: false,
+        error: 'Razorpay is not configured',
+      };
+    }
+
     const hmac = createHmac('sha256', process.env.RAZORPAY_KEY_SECRET as string);
     hmac.update(`${orderId}|${paymentId}`);
     const generatedSignature = hmac.digest('hex');
@@ -59,7 +98,7 @@ export async function verifyRazorpayPayment(
     }
 
     // Fetch payment details
-    const payment = await razorpay.payments.fetch(paymentId);
+    const payment = await razorpayClient.payments.fetch(paymentId);
 
     return {
       success: true,
@@ -81,7 +120,15 @@ export async function createStripePaymentIntent(
   customerEmail: string
 ) {
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const paymentIntent = await stripeClient.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'inr',
       metadata: {
@@ -106,7 +153,15 @@ export async function createStripePaymentIntent(
 // Stripe payment confirmation
 export async function confirmStripePayment(paymentIntentId: string) {
   try {
-    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const paymentIntent = await stripeClient.paymentIntents.retrieve(paymentIntentId);
 
     return {
       success: paymentIntent.status === 'succeeded',
@@ -124,7 +179,15 @@ export async function confirmStripePayment(paymentIntentId: string) {
 // Refund handling for Razorpay
 export async function refundRazorpayPayment(paymentId: string, amount?: number) {
   try {
-    const refund = await razorpay.payments.refund(paymentId, {
+    const razorpayClient = getRazorpay();
+    if (!razorpayClient) {
+      return {
+        success: false,
+        error: 'Razorpay is not configured',
+      };
+    }
+
+    const refund = await razorpayClient.payments.refund(paymentId, {
       amount: amount ? Math.round(amount * 100) : undefined,
     });
 
@@ -144,7 +207,15 @@ export async function refundRazorpayPayment(paymentId: string, amount?: number) 
 // Refund handling for Stripe
 export async function refundStripePayment(paymentIntentId: string, amount?: number) {
   try {
-    const refund = await stripe.refunds.create({
+    const stripeClient = getStripe();
+    if (!stripeClient) {
+      return {
+        success: false,
+        error: 'Stripe is not configured',
+      };
+    }
+
+    const refund = await stripeClient.refunds.create({
       payment_intent: paymentIntentId,
       amount: amount ? Math.round(amount * 100) : undefined,
     });

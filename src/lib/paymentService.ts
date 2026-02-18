@@ -7,10 +7,15 @@ export type PaymentGateway = 'razorpay' | 'stripe';
 // Initialize Razorpay with error handling for missing keys
 let razorpay: ReturnType<typeof initializeRazorpay> | null = null;
 function initializeRazorpay() {
+  // Skip initialization if keys are not configured
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    return null;
+  }
+  
   try {
     return new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID || '',
-      key_secret: process.env.RAZORPAY_KEY_SECRET || '',
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
   } catch (error) {
     console.warn('Razorpay initialization warning:', error);
@@ -21,8 +26,13 @@ function initializeRazorpay() {
 // Initialize Stripe with error handling for missing keys
 let stripe: InstanceType<typeof Stripe> | null = null;
 function initializeStripe() {
+  // Skip initialization if keys are not configured
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return null;
+  }
+  
   try {
-    return new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+    return new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: '2023-10-16',
     });
   } catch (error) {
