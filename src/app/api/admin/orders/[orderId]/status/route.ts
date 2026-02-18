@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email';
 
+// Force dynamic rendering for this route (don't try to static render at build time)
+export const dynamic = 'force-dynamic';
+
 // PUT /api/admin/orders/[orderId]/status - Update order status (admin only)
 export async function PUT(
   request: NextRequest,
