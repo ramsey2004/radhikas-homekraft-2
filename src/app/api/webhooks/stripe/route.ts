@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { handleStripeWebhook } from '@/lib/paymentService';
 import { sendEmail } from '@/lib/emailService';
 
+// Force dynamic rendering to skip payment initialization during build
+export const dynamic = 'force-dynamic';
+
 // POST /api/webhooks/stripe - Handle Stripe webhook
 export async function POST(request: NextRequest) {
   try {
