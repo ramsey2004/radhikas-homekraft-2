@@ -147,7 +147,7 @@ export async function GET(request: NextRequest) {
       take: 5,
     });
 
-    const topBrowsers = browserStats.map(b => ({
+    const topBrowsers = browserStats.map((b: any) => ({
       device: b.userAgent || 'unknown',
       count: b._count,
     }));
