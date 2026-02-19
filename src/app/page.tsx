@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Search, User, ShoppingBag } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Navigation Links
 const NAV_LINKS = [
-  { label: 'HOME', href: '/' },
   { label: 'COLLECTIONS', href: '/collections' },
   { label: 'CERAMICS', href: '/collections/ceramics' },
   { label: 'TEXTILES', href: '/collections/textiles' },
@@ -16,99 +15,97 @@ const NAV_LINKS = [
 ];
 
 /**
- * Mobile Navigation Component
- */
-function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -300 }}
-      animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -300 }}
-      transition={{ duration: 0.3 }}
-      className={`fixed inset-0 z-40 bg-white ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-    >
-      <div className="flex flex-col h-full">
-        {/* Close button */}
-        <div className="flex justify-between items-center p-6 border-b border-gray-200">
-          <span className="text-2xl font-bold tracking-wider">RADHIKA'S</span>
-          <button onClick={onClose} className="p-2">
-            <X size={24} />
-          </button>
-        </div>
-
-        {/* Navigation links */}
-        <nav className="flex-1 overflow-y-auto p-6 space-y-6">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={onClose}
-              className="block text-lg tracking-wide hover:opacity-60 transition-opacity"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </motion.div>
-  );
-}
-
-/**
- * Navigation Bar Component
+ * Modern Navigation Bar Component
  */
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
-      {/* Yellow Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-yellow-300 border-b border-yellow-400">
+      {/* Modern Sticky Nav */}
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-50 bg-yellow-300/95 backdrop-blur-sm border-b border-yellow-400/50"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            {/* Logo - Minimal */}
             <Link href="/" className="flex-shrink-0">
-              <span className="text-xl sm:text-2xl font-bold tracking-wider text-black">RADHIKA'S</span>
+              <motion.span 
+                whileHover={{ scale: 1.05 }}
+                className="text-lg sm:text-xl font-semibold tracking-widest text-black"
+              >
+                RADHIKA'S
+              </motion.span>
             </Link>
 
             {/* Desktop Menu - Centered */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-12">
+            <div className="hidden md:flex items-center gap-10 lg:gap-16 absolute left-1/2 transform -translate-x-1/2">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-black tracking-wider hover:opacity-70 transition-opacity"
+                  className="text-xs sm:text-sm font-medium text-black tracking-wide uppercase relative group"
                 >
                   {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
             </div>
 
             {/* Icons - Right */}
-            <div className="flex items-center gap-4 sm:gap-6">
-              <button className="p-2 hover:bg-yellow-400 rounded-lg transition-colors">
-                <Search size={20} className="text-black" />
-              </button>
-              <button className="hidden sm:flex p-2 hover:bg-yellow-400 rounded-lg transition-colors">
-                <User size={20} className="text-black" />
-              </button>
-              <button className="p-2 hover:bg-yellow-400 rounded-lg transition-colors">
-                <ShoppingBag size={20} className="text-black" />
-              </button>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-black transition-colors"
+              >
+                <Search size={18} className="sm:w-5 sm:h-5" />
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-black transition-colors"
+              >
+                <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
+              </motion.button>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 hover:bg-yellow-400 rounded-lg transition-colors"
+                className="md:hidden p-2 text-black transition-colors"
               >
-                <Menu size={20} className="text-black" />
-              </button>
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.button>
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile Navigation */}
-      <MobileNav isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      {/* Mobile Navigation Menu */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: mobileMenuOpen ? 1 : 0, height: mobileMenuOpen ? 'auto' : 0 }}
+        transition={{ duration: 0.3 }}
+        className="md:hidden bg-yellow-300 border-b border-yellow-400 overflow-hidden"
+      >
+        <div className="px-4 py-4 space-y-3">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-4 py-2 text-sm font-medium text-black tracking-wide uppercase hover:bg-yellow-400/50 rounded transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </motion.div>
     </>
   );
 }
