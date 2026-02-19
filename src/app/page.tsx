@@ -27,7 +27,7 @@ function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 bg-yellow-300/95 backdrop-blur-sm border-b border-yellow-400/50"
+        className="sticky top-0 z-50 bg-teal-500/95 backdrop-blur-sm border-b border-teal-600/50"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
@@ -35,7 +35,7 @@ function Navigation() {
             <Link href="/" className="flex-shrink-0">
               <motion.span 
                 whileHover={{ scale: 1.05 }}
-                className="text-lg sm:text-xl font-semibold tracking-widest text-black"
+                className="text-lg sm:text-xl font-semibold tracking-widest text-white"
               >
                 RADHIKA'S
               </motion.span>
@@ -47,10 +47,10 @@ function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-xs sm:text-sm font-medium text-black tracking-wide uppercase relative group"
+                  className="text-xs sm:text-sm font-medium text-white tracking-wide uppercase relative group"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
             </div>
@@ -60,14 +60,14 @@ function Navigation() {
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-black transition-colors"
+                className="p-2 text-white transition-colors"
               >
                 <Search size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-black transition-colors"
+                className="p-2 text-white transition-colors"
               >
                 <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
@@ -77,7 +77,7 @@ function Navigation() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-black transition-colors"
+                className="md:hidden p-2 text-white transition-colors"
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.button>
@@ -91,7 +91,7 @@ function Navigation() {
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: mobileMenuOpen ? 1 : 0, height: mobileMenuOpen ? 'auto' : 0 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-yellow-300 border-b border-yellow-400 overflow-hidden"
+        className="md:hidden bg-teal-500 border-b border-teal-600 overflow-hidden"
       >
         <div className="px-4 py-4 space-y-3">
           {NAV_LINKS.map((link) => (
@@ -99,7 +99,7 @@ function Navigation() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-medium text-black tracking-wide uppercase hover:bg-yellow-400/50 rounded transition-colors"
+              className="block px-4 py-2 text-sm font-medium text-white tracking-wide uppercase hover:bg-teal-600/50 rounded transition-colors"
             >
               {link.label}
             </Link>
