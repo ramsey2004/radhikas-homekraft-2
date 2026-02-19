@@ -39,7 +39,6 @@ const products = [
 ];
 
 export default function BedsheetsCollection() {
-  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
 
   return (
     <div style={{ backgroundColor: COLORS.ivory, minHeight: '100vh' }}>
@@ -82,7 +81,7 @@ export default function BedsheetsCollection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group cursor-pointer"
-              onClick={() => setSelectedProduct(product.id)}
+              onClick={() => window.location.href = `/collections/bedsheets/${product.id}`}
             >
               {/* Product Card */}
               <div className="mb-4 overflow-hidden rounded-lg">

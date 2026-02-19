@@ -6,6 +6,9 @@ import { CustomCursor } from '@/components/CustomCursor';
 import { StickyCartButton } from '@/components/StickyCartButton';
 import { ExitIntentPopup } from '@/components/ExitIntentPopup';
 import { ComparisonCounter } from '@/components/ComparisonButton';
+import { ShoppingCart } from '@/components/ShoppingCart';
+import { SearchModal } from '@/components/SearchModal';
+import { LayoutContent } from '@/components/LayoutContent';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -183,16 +186,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-neutral-50 dark:bg-gray-900 font-sans text-dark-50 dark:text-gray-100 transition-colors duration-300">
         <Providers>
-          <CustomCursor />
-          <StickyCartButton />
-          <ComparisonCounter />
-          <ExitIntentPopup 
-            discount={15}
-            headline="Don't Leave Empty-Handed!"
-            subheadline="Get 15% off your first order"
-          />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <LayoutContent>{children}</LayoutContent>
         </Providers>
       </body>
     </html>

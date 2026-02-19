@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Search, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useCart } from '@/contexts/CartContext';
+import { useSearch } from '@/contexts/SearchContext';
 
 // Navigation Links
 const NAV_LINKS = [
@@ -30,6 +32,9 @@ const COLORS = {
  */
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { state, dispatch } = useCart();
+  const { setIsSearchOpen } = useSearch();
+  const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <>
@@ -74,6 +79,7 @@ function Navigation() {
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setIsSearchOpen(true)}
                 className="p-2 transition-colors"
                 style={{ color: COLORS.ivory }}
               >
@@ -82,10 +88,16 @@ function Navigation() {
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 transition-colors"
+                onClick={() => dispatch({ type: 'TOGGLE_CART' })}
+                className="p-2 transition-colors relative"
                 style={{ color: COLORS.ivory }}
               >
                 <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
               </motion.button>
 
               {/* Mobile Menu Button */}

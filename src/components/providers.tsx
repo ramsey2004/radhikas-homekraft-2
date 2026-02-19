@@ -9,6 +9,8 @@ import { initializeTheme } from '@/lib/theme';
 import { registerServiceWorker } from '@/lib/pwa';
 import { ComparisonProvider } from '@/contexts/ComparisonContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { CartProvider } from '@/contexts/CartContext';
+import { SearchProvider } from '@/contexts/SearchContext';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -39,9 +41,13 @@ export function Providers({ children }: ProvidersProps) {
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
           <ComparisonProvider>
-            <Toaster position="top-right" reverseOrder={false} />
-            {children}
-            <RecentlyViewed />
+            <CartProvider>
+              <SearchProvider>
+                <Toaster position="top-right" reverseOrder={false} />
+                {children}
+                <RecentlyViewed />
+              </SearchProvider>
+            </CartProvider>
           </ComparisonProvider>
         </QueryClientProvider>
       </ThemeProvider>
