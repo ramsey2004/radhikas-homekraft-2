@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Providers } from '@/components/providers';
-import { StickyHeader } from '@/components/layout/StickyHeader';
 import { Footer } from '@/components/layout/Footer';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { CustomCursor } from '@/components/CustomCursor';
@@ -192,7 +191,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             headline="Don't Leave Empty-Handed!"
             subheadline="Get 15% off your first order"
           />
-          <StickyHeader />
           <main className="flex-grow">{children}</main>
           <Footer />
         </Providers>
