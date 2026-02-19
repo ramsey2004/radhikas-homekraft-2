@@ -99,9 +99,14 @@ model Product {
   description  String
   shortDescription String?
   price        Float
+  maxPrice     Float?   // For Shopify products with price ranges
   discountedPrice Float?
   inventory    Int      @default(0)
   sku          String   @unique
+  
+  // Shopify integration
+  shopifyId    String?  // External Shopify product ID
+  shopifyProductHandle String? // Shopify product handle for URLs
   
   // Images
   images       String[] // JSON array of image URLs
@@ -239,6 +244,9 @@ model Order {
   // Payment info
   paymentId         String?
   paymentRef        String?
+  
+  // Shopify integration
+  shopifyCheckoutId String? // Shopify checkout ID for tracking
   
   // Discount
   discountCodeId    String?
