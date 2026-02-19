@@ -5,8 +5,10 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { FiStar, FiHeart, FiShoppingCart, FiBarChart2 } from 'react-icons/fi';
 import { useState } from 'react';
 import { useCart } from '@/hooks/useCart';
+import { useWishlist } from '@/hooks/useWishlist';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { Product } from '@/types';
+import toast from 'react-hot-toast';
 
 interface ProductCardProps {
   id: number;
@@ -35,11 +37,12 @@ export default function ProductCard({
   description,
   material,
 }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const { addItem } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToComparison, removeFromComparison, isInComparison } = useComparison();
   const inComparison = isInComparison(String(id));
+  const isWishlisted = isInWishlist(String(id));
 
   // Calculate discount percentage
   const discountPercent = Math.round(((originalPrice - price) / originalPrice) * 100);
@@ -71,6 +74,16 @@ export default function ProductCard({
       setTimeout(() => setIsAdding(false), 500);
     } catch (error) {
       setIsAdding(false);
+    }
+  };
+
+  const handleWishlistToggle = () => {
+    if (isWishlisted) {
+      removeFromWishlist(String(id));
+      toast.success('Removed from wishlist');
+    } else {
+      addToWishlist(String(id));
+      toast.success('Added to wishlist');
     }
   };
 
@@ -161,9 +174,10 @@ export default function ProductCard({
           </button>
           {/* Wishlist Button */}
           <button
-            onClick={() => setIsWishlisted(!isWishlisted)}
+            onClick={handleWishlistToggle}
             className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-all duration-200 hover:scale-110"
             aria-label="Add to wishlist"
+            title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
           >
             <FiHeart
               className={`h-5 w-5 transition-colors ${
