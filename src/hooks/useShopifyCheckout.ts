@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 export interface ShopifyCheckoutItem {
@@ -9,7 +8,6 @@ export interface ShopifyCheckoutItem {
 }
 
 export function useShopifyCheckout() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const createCheckout = async (items: ShopifyCheckoutItem[]) => {
