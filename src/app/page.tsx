@@ -14,6 +14,16 @@ const NAV_LINKS = [
   { label: 'GIFTING', href: '/collections/gifting' },
 ];
 
+// Color Scheme
+const COLORS = {
+  deepTeal: '#1A7A6E',
+  gold: '#C9A84C',
+  ivory: '#FAF3E0',
+  charcoal: '#2D2D2D',
+  lightBeige: '#E8D5C4',
+  darkTeal: '#2D5252',
+};
+
 /**
  * Modern Navigation Bar Component
  */
@@ -27,7 +37,8 @@ function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 bg-teal-500/95 backdrop-blur-sm border-b border-teal-600/50"
+        className="sticky top-0 z-50 backdrop-blur-sm border-b"
+        style={{ backgroundColor: COLORS.deepTeal, borderColor: COLORS.gold }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
@@ -35,7 +46,8 @@ function Navigation() {
             <Link href="/" className="flex-shrink-0">
               <motion.span 
                 whileHover={{ scale: 1.05 }}
-                className="text-lg sm:text-xl font-semibold tracking-widest text-white"
+                className="text-lg sm:text-xl font-semibold tracking-widest"
+                style={{ color: COLORS.gold }}
               >
                 RADHIKA'S
               </motion.span>
@@ -47,10 +59,11 @@ function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-xs sm:text-sm font-medium text-white tracking-wide uppercase relative group"
+                  className="text-xs sm:text-sm font-medium tracking-wide uppercase relative group"
+                  style={{ color: COLORS.ivory }}
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300" style={{ backgroundColor: COLORS.gold }} />
                 </Link>
               ))}
             </div>
@@ -60,14 +73,16 @@ function Navigation() {
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-white transition-colors"
+                className="p-2 transition-colors"
+                style={{ color: COLORS.ivory }}
               >
                 <Search size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-white transition-colors"
+                className="p-2 transition-colors"
+                style={{ color: COLORS.ivory }}
               >
                 <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
@@ -77,7 +92,8 @@ function Navigation() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-white transition-colors"
+                className="md:hidden p-2 transition-colors"
+                style={{ color: COLORS.ivory }}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.button>
@@ -91,7 +107,8 @@ function Navigation() {
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: mobileMenuOpen ? 1 : 0, height: mobileMenuOpen ? 'auto' : 0 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-teal-500 border-b border-teal-600 overflow-hidden"
+        className="md:hidden border-b overflow-hidden"
+        style={{ backgroundColor: COLORS.deepTeal, borderColor: COLORS.gold }}
       >
         <div className="px-4 py-4 space-y-3">
           {NAV_LINKS.map((link) => (
@@ -99,7 +116,8 @@ function Navigation() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-medium text-white tracking-wide uppercase hover:bg-teal-600/50 rounded transition-colors"
+              className="block px-4 py-2 text-sm font-medium tracking-wide uppercase rounded transition-colors"
+              style={{ color: COLORS.ivory }}
             >
               {link.label}
             </Link>
@@ -115,7 +133,7 @@ function Navigation() {
  */
 function HeroSection() {
   return (
-    <section className="relative w-full h-screen sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-teal-600">
+    <section className="relative w-full h-screen sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden" style={{ backgroundColor: COLORS.deepTeal }}>
       {/* Hero Image */}
       <div className="relative w-full h-full">
         <Image
@@ -128,7 +146,7 @@ function HeroSection() {
         />
 
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-teal-900/30" />
+        <div className="absolute inset-0" style={{ backgroundColor: `rgba(26, 122, 110, 0.3)` }} />
       </div>
 
       {/* Content Overlay */}
@@ -140,17 +158,18 @@ function HeroSection() {
       >
         {/* Product Name */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-wider text-white uppercase">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-wider uppercase" style={{ color: COLORS.ivory }}>
             SATVAM
           </h1>
-          <p className="text-base sm:text-lg tracking-widest text-white mt-4">COLLECTION</p>
+          <p className="text-base sm:text-lg tracking-widest mt-4" style={{ color: COLORS.ivory }}>COLLECTION</p>
         </div>
 
         {/* Call to Action Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-8 px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-sm sm:text-base tracking-wider font-medium hover:bg-teal-400 hover:text-teal-900 transition-all duration-300"
+          className="mt-8 px-8 sm:px-10 py-3 sm:py-4 border-2 text-sm sm:text-base tracking-wider font-medium transition-all duration-300"
+          style={{ borderColor: COLORS.gold, color: COLORS.deepTeal, backgroundColor: COLORS.gold }}
         >
           SHOP WOMEN
         </motion.button>
@@ -179,7 +198,7 @@ function GallerySection() {
   ];
 
   return (
-    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: COLORS.ivory }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Top Spacing */}
         <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24" />
@@ -193,7 +212,8 @@ function GallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="group relative aspect-square overflow-hidden bg-teal-700"
+              className="group relative aspect-square overflow-hidden"
+              style={{ backgroundColor: COLORS.lightBeige }}
             >
               {/* Image */}
               <Image
@@ -206,11 +226,11 @@ function GallerySection() {
 
               {/* Overlay on Hover */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                <h3 className="text-2xl sm:text-3xl font-light text-white tracking-wider mb-3">
+                <h3 className="text-2xl sm:text-3xl font-light tracking-wider mb-3" style={{ color: COLORS.ivory }}>
                   {image.label}
                 </h3>
-                <p className="text-sm tracking-widest text-white mb-6">{image.category}</p>
-                <Link href="/collections" className="px-6 py-2 border border-white text-white text-sm tracking-wider hover:bg-teal-400 hover:text-teal-900 transition-all">
+                <p className="text-sm tracking-widest mb-6" style={{ color: COLORS.ivory }}>{image.category}</p>
+                <Link href="/collections" className="px-6 py-2 border text-sm tracking-wider transition-all" style={{ borderColor: COLORS.gold, color: COLORS.gold, backgroundColor: `rgba(201, 168, 76, 0.1)` }}>
                   EXPLORE
                 </Link>
               </div>
@@ -249,7 +269,7 @@ function FeaturedSection() {
   ];
 
   return (
-    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24 border-t border-teal-700">
+    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24 border-t" style={{ backgroundColor: COLORS.ivory, borderTopColor: COLORS.gold }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {features.map((feature, index) => (
@@ -261,10 +281,10 @@ function FeaturedSection() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="text-sm sm:text-base font-medium tracking-widest text-white mb-3">
+              <h3 className="text-sm sm:text-base font-medium tracking-widest mb-3" style={{ color: COLORS.deepTeal }}>
                 {feature.title}
               </h3>
-              <p className="text-xs sm:text-sm text-teal-100 leading-relaxed">
+              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: COLORS.charcoal }}>
                 {feature.description}
               </p>
             </motion.div>
@@ -290,7 +310,7 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: COLORS.ivory }}>
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -299,10 +319,10 @@ function NewsletterSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wider text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wider mb-4" style={{ color: COLORS.deepTeal }}>
             STAY CONNECTED
           </h2>
-          <p className="text-sm sm:text-base text-teal-100 mb-8">
+          <p className="text-sm sm:text-base mb-8" style={{ color: COLORS.charcoal }}>
             Receive updates on new collections, artisan stories, and exclusive offers.
           </p>
 
@@ -314,13 +334,14 @@ function NewsletterSection() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="flex-1 px-4 py-3 text-sm border border-teal-400 bg-teal-500/30 text-white placeholder-teal-200 focus:outline-none focus:border-teal-300 transition-colors"
+              className="flex-1 px-4 py-3 text-sm border focus:outline-none transition-colors"
+              style={{ borderColor: COLORS.gold, backgroundColor: '#FFFFFF', color: COLORS.charcoal }}
             />
             <motion.button
-              whileHover={{ backgroundColor: '#14b8a6' }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="px-6 py-3 bg-teal-400 text-teal-900 text-sm font-medium tracking-wider hover:bg-teal-300 transition-colors"
+              className="px-6 py-3 text-sm font-medium tracking-wider transition-colors"
+              style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
             >
               SUBSCRIBE
             </motion.button>
@@ -330,7 +351,8 @@ function NewsletterSection() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-sm text-teal-100 mt-3"
+              className="text-sm mt-3"
+              style={{ color: COLORS.deepTeal }}
             >
               ✓ Thank you for subscribing!
             </motion.p>
@@ -346,7 +368,7 @@ function NewsletterSection() {
  */
 export default function HomePage() {
   return (
-    <div className="w-full overflow-hidden bg-teal-600">
+    <div className="w-full overflow-hidden" style={{ backgroundColor: COLORS.ivory }}>
       {/* Navigation */}
       <Navigation />
 
@@ -363,13 +385,13 @@ export default function HomePage() {
       <NewsletterSection />
 
       {/* Footer */}
-      <footer className="bg-teal-800 text-white py-12 sm:py-16 md:py-20">
+      <footer className="text-white py-12 sm:py-16 md:py-20" style={{ backgroundColor: COLORS.deepTeal }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand */}
             <div>
               <h3 className="text-lg font-medium tracking-wider mb-4">RADHIKA'S HOMEKRAFT</h3>
-              <p className="text-sm text-teal-100">
+              <p className="text-sm" style={{ color: COLORS.lightBeige }}>
                 Artisan-crafted home decor celebrating India's rich cultural heritage.
               </p>
             </div>
@@ -377,7 +399,7 @@ export default function HomePage() {
             {/* Shop */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">SHOP</h4>
-              <ul className="space-y-2 text-sm text-teal-100">
+              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
                 <li>
                   <Link href="/collections" className="hover:text-white transition-colors">
                     Collections
@@ -404,7 +426,7 @@ export default function HomePage() {
             {/* Support */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">SUPPORT</h4>
-              <ul className="space-y-2 text-sm text-teal-100">
+              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
                     Contact Us
@@ -431,7 +453,7 @@ export default function HomePage() {
             {/* Legal */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">LEGAL</h4>
-              <ul className="space-y-2 text-sm text-teal-100">
+              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
                 <li>
                   <Link href="/privacy" className="hover:text-white transition-colors">
                     Privacy Policy
@@ -452,16 +474,16 @@ export default function HomePage() {
           </div>
 
           {/* Bottom Footer */}
-          <div className="border-t border-teal-700 pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-teal-100">
+          <div className="border-t pt-8 flex flex-col sm:flex-row items-center justify-between text-sm" style={{ borderColor: COLORS.darkTeal, color: COLORS.lightBeige }}>
             <p>&copy; 2026 Radhika's Homekraft. All rights reserved.</p>
             <div className="flex gap-6 mt-4 sm:mt-0">
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
                 Instagram
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
                 Pinterest
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
                 YouTube
               </Link>
             </div>
