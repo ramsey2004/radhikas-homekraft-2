@@ -27,32 +27,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [reviews] = useState<ProductReview[]>([
-    {
-      id: 1,
-      author: 'Priya Sharma',
-      rating: 5,
-      comment: 'Excellent quality! The product arrived in perfect condition. Highly satisfied with my purchase.',
-      date: '2 weeks ago',
-      verified: true,
-    },
-    {
-      id: 2,
-      author: 'Raj Kumar',
-      rating: 4,
-      comment: 'Great product but delivery took a bit longer than expected. Quality is top-notch though.',
-      date: '1 month ago',
-      verified: true,
-    },
-    {
-      id: 3,
-      author: 'Anjali Desai',
-      rating: 5,
-      comment: 'Perfect! Exactly as described. Will definitely purchase again.',
-      date: '1 month ago',
-      verified: true,
-    },
-  ]);
+  const [reviews, setReviews] = useState<ProductReview[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
 
   const product = PRODUCTS.find((p) => p.slug === params.slug);
   const { addItem } = useCart();
@@ -70,6 +46,51 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
     }
   }, [product?.id]);
+
+  // Fetch reviews from database
+  useEffect(() => {
+    const fetchReviews = async () => {
+      if (!product?.id) return;
+      
+      setReviewsLoading(true);
+      try {
+        const response = await fetch(`/api/reviews?productId=${product.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.reviews && Array.isArray(data.reviews)) {
+            setReviews(
+              data.reviews.map((r: any) => ({
+                id: r.id,
+                author: r.user?.name || 'Anonymous',
+                rating: r.rating,
+                comment: r.comment,
+                date: new Date(r.createdAt).toLocaleDateString(),
+                verified: r.verified,
+              }))
+            );
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+      } finally {
+        setReviewsLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, [product?.id]);
+
+  const handleReviewSubmitted = (newReview: any) => {
+    const formattedReview: ProductReview = {
+      id: Math.random(),
+      author: 'You',
+      rating: newReview.rating,
+      comment: newReview.comment,
+      date: 'Just now',
+      verified: newReview.verified,
+    };
+    setReviews([formattedReview, ...reviews]);
+  };
 
   if (!product) {
     return (
@@ -409,7 +430,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           {/* Review Submission Form */}
           <div className="mb-12 p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200">
             <h3 className="text-xl font-semibold mb-6">Share Your Feedback</h3>
-            <ReviewSubmitForm productId={String(product.id)} productName={product.name} />
+            <ReviewSubmitForm 
+              productId={String(product.id)} 
+              productName={product.name}
+              onReviewSubmitted={handleReviewSubmitted}
+            />
           </div>
 
           {/* Reviews Summary */}
@@ -434,7 +459,24 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             <div className="md:col-span-2">
-              <ReviewsList reviews={reviews.map((r) => ({ id: String(r.id), productId: String(product.id), userId: '', rating: r.rating, comment: r.comment, images: [], verified: r.verified, helpful: 0, unhelpful: 0, createdAt: new Date(), updatedAt: new Date() }))} />
+              <ReviewsList 
+                reviews={reviews.map((r) => ({ 
+                  id: String(r.id), 
+                  productId: String(product.id), 
+                  userId: '', 
+                  rating: r.rating, 
+                  comment: r.comment, 
+                  title: r.comment.substring(0, 50),
+                  images: [], 
+                  verified: r.verified, 
+                  helpful: 0, 
+                  unhelpful: 0, 
+                  createdAt: new Date(), 
+                  updatedAt: new Date(),
+                  userName: r.author,
+                }))} 
+                isLoading={reviewsLoading}
+              />
             </div>
           </div>
         </div>
