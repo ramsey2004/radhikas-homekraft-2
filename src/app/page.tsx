@@ -115,7 +115,7 @@ function Navigation() {
  */
 function HeroSection() {
   return (
-    <section className="relative w-full h-screen sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-black">
+    <section className="relative w-full h-screen sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-teal-600">
       {/* Hero Image */}
       <div className="relative w-full h-full">
         <Image
@@ -128,7 +128,7 @@ function HeroSection() {
         />
 
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-teal-900/30" />
       </div>
 
       {/* Content Overlay */}
@@ -150,7 +150,7 @@ function HeroSection() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-8 px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-sm sm:text-base tracking-wider font-medium hover:bg-white hover:text-black transition-all duration-300"
+          className="mt-8 px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-sm sm:text-base tracking-wider font-medium hover:bg-teal-400 hover:text-teal-900 transition-all duration-300"
         >
           SHOP WOMEN
         </motion.button>
@@ -179,7 +179,7 @@ function GallerySection() {
   ];
 
   return (
-    <section className="w-full bg-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Top Spacing */}
         <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24" />
@@ -193,7 +193,7 @@ function GallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="group relative aspect-square overflow-hidden bg-gray-100"
+              className="group relative aspect-square overflow-hidden bg-teal-700"
             >
               {/* Image */}
               <Image
@@ -210,7 +210,7 @@ function GallerySection() {
                   {image.label}
                 </h3>
                 <p className="text-sm tracking-widest text-white mb-6">{image.category}</p>
-                <Link href="/collections" className="px-6 py-2 border border-white text-white text-sm tracking-wider hover:bg-white hover:text-black transition-all">
+                <Link href="/collections" className="px-6 py-2 border border-white text-white text-sm tracking-wider hover:bg-teal-400 hover:text-teal-900 transition-all">
                   EXPLORE
                 </Link>
               </div>
@@ -249,7 +249,7 @@ function FeaturedSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-12 sm:py-16 md:py-20 lg:py-24 border-t border-gray-200">
+    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24 border-t border-teal-700">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {features.map((feature, index) => (
@@ -261,10 +261,10 @@ function FeaturedSection() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="text-sm sm:text-base font-medium tracking-widest text-gray-900 mb-3">
+              <h3 className="text-sm sm:text-base font-medium tracking-widest text-white mb-3">
                 {feature.title}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-teal-100 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
@@ -290,7 +290,7 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="w-full bg-gray-50 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="w-full bg-teal-600 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -299,10 +299,10 @@ function NewsletterSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wider text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wider text-white mb-4">
             STAY CONNECTED
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 mb-8">
+          <p className="text-sm sm:text-base text-teal-100 mb-8">
             Receive updates on new collections, artisan stories, and exclusive offers.
           </p>
 
@@ -314,13 +314,13 @@ function NewsletterSection() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="flex-1 px-4 py-3 text-sm border border-gray-300 focus:outline-none focus:border-gray-900 transition-colors"
+              className="flex-1 px-4 py-3 text-sm border border-teal-400 bg-teal-500/30 text-white placeholder-teal-200 focus:outline-none focus:border-teal-300 transition-colors"
             />
             <motion.button
-              whileHover={{ backgroundColor: '#000' }}
+              whileHover={{ backgroundColor: '#14b8a6' }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="px-6 py-3 bg-gray-900 text-white text-sm font-medium tracking-wider hover:bg-gray-800 transition-colors"
+              className="px-6 py-3 bg-teal-400 text-teal-900 text-sm font-medium tracking-wider hover:bg-teal-300 transition-colors"
             >
               SUBSCRIBE
             </motion.button>
@@ -330,7 +330,7 @@ function NewsletterSection() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-sm text-green-600 mt-3"
+              className="text-sm text-teal-100 mt-3"
             >
               ✓ Thank you for subscribing!
             </motion.p>
@@ -346,7 +346,7 @@ function NewsletterSection() {
  */
 export default function HomePage() {
   return (
-    <div className="w-full overflow-hidden bg-white">
+    <div className="w-full overflow-hidden bg-teal-600">
       {/* Navigation */}
       <Navigation />
 
@@ -363,13 +363,13 @@ export default function HomePage() {
       <NewsletterSection />
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12 sm:py-16 md:py-20">
+      <footer className="bg-teal-800 text-white py-12 sm:py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand */}
             <div>
               <h3 className="text-lg font-medium tracking-wider mb-4">RADHIKA'S HOMEKRAFT</h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-teal-100">
                 Artisan-crafted home decor celebrating India's rich cultural heritage.
               </p>
             </div>
@@ -377,7 +377,7 @@ export default function HomePage() {
             {/* Shop */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">SHOP</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-teal-100">
                 <li>
                   <Link href="/collections" className="hover:text-white transition-colors">
                     Collections
@@ -404,7 +404,7 @@ export default function HomePage() {
             {/* Support */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">SUPPORT</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-teal-100">
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
                     Contact Us
@@ -431,7 +431,7 @@ export default function HomePage() {
             {/* Legal */}
             <div>
               <h4 className="text-sm font-medium tracking-widest mb-4">LEGAL</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-teal-100">
                 <li>
                   <Link href="/privacy" className="hover:text-white transition-colors">
                     Privacy Policy
@@ -452,7 +452,7 @@ export default function HomePage() {
           </div>
 
           {/* Bottom Footer */}
-          <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-400">
+          <div className="border-t border-teal-700 pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-teal-100">
             <p>&copy; 2026 Radhika's Homekraft. All rights reserved.</p>
             <div className="flex gap-6 mt-4 sm:mt-0">
               <Link href="#" className="hover:text-white transition-colors">
