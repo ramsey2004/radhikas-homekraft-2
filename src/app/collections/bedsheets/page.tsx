@@ -17,31 +17,24 @@ const COLORS = {
 const products = [
   {
     id: 1,
-    name: 'Indigo Block Print Bedsheet',
-    price: '₹1,899',
+    name: 'Blue Block Print Bedsheet',
+    price: '₹2,570',
     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=500&fit=crop',
-    description: 'Hand-blocked traditional indigo cotton bedsheet',
+    description: 'Beautiful blue block print bedsheet with traditional patterns',
   },
   {
     id: 2,
-    name: 'Floral Tapestry Set',
-    price: '₹2,499',
+    name: 'Green Block Print Bedsheet',
+    price: '₹2,570',
     image: 'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=500&fit=crop',
-    description: 'Vibrant floral printed cotton ensemble',
+    description: 'Elegant green block print bedsheet with intricate designs',
   },
   {
     id: 3,
-    name: 'Geometric Pattern Linens',
-    price: '₹1,699',
+    name: 'Pink Block Print Bedsheet',
+    price: '₹2,570',
     image: 'https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=500&h=500&fit=crop',
-    description: 'Modern geometric design on premium cotton',
-  },
-  {
-    id: 4,
-    name: 'Organic Cotton Bedding',
-    price: '₹2,299',
-    image: 'https://images.unsplash.com/photo-1578902050959-aa4a901a96ab?w=500&h=500&fit=crop',
-    description: 'Eco-friendly organic cotton collection',
+    description: 'Charming pink block print bedsheet with floral motifs',
   },
 ];
 
