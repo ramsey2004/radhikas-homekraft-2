@@ -8,10 +8,11 @@ import { motion } from 'framer-motion';
 
 // Navigation Links
 const NAV_LINKS = [
-  { label: 'COLLECTIONS', href: '/collections' },
-  { label: 'CERAMICS', href: '/collections/ceramics' },
-  { label: 'TEXTILES', href: '/collections/textiles' },
-  { label: 'GIFTING', href: '/collections/gifting' },
+  { label: 'PRĀKHARYA', href: '/collections/lamps' },
+  { label: 'SĪVANA', href: '/collections/bedsheets' },
+  { label: 'GRIHKALĀ', href: '/collections/furniture' },
+  { label: 'AMALA', href: '/collections/ceramics' },
+  { label: 'PUNĪTA', href: '/collections/gifting' },
 ];
 
 // Color Scheme
