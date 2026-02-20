@@ -44,7 +44,7 @@ function Navigation() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: COLORS.deepTeal, borderColor: COLORS.gold }}
+        style={{ backgroundColor: COLORS.gold, borderColor: COLORS.deepTeal }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
@@ -53,7 +53,7 @@ function Navigation() {
               <motion.span 
                 whileHover={{ scale: 1.05 }}
                 className="text-lg sm:text-xl font-semibold tracking-widest"
-                style={{ color: COLORS.gold }}
+                style={{ color: COLORS.deepTeal }}
               >
                 RADHIKA'S
               </motion.span>
@@ -66,10 +66,10 @@ function Navigation() {
                   key={link.href}
                   href={link.href}
                   className="text-xs sm:text-sm font-medium tracking-wide uppercase relative group"
-                  style={{ color: COLORS.ivory }}
+                  style={{ color: COLORS.deepTeal }}
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300" style={{ backgroundColor: COLORS.gold }} />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300" style={{ backgroundColor: COLORS.deepTeal }} />
                 </Link>
               ))}
             </div>
@@ -81,7 +81,7 @@ function Navigation() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 transition-colors"
-                style={{ color: COLORS.ivory }}
+                style={{ color: COLORS.deepTeal }}
               >
                 <Search size={18} className="sm:w-5 sm:h-5" />
               </motion.button>
@@ -90,7 +90,7 @@ function Navigation() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => dispatch({ type: 'TOGGLE_CART' })}
                 className="p-2 transition-colors relative"
-                style={{ color: COLORS.ivory }}
+                style={{ color: COLORS.deepTeal }}
               >
                 <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
                 {totalItems > 0 && (
@@ -106,7 +106,7 @@ function Navigation() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2 transition-colors"
-                style={{ color: COLORS.ivory }}
+                style={{ color: COLORS.deepTeal }}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.button>
@@ -121,7 +121,7 @@ function Navigation() {
         animate={{ opacity: mobileMenuOpen ? 1 : 0, height: mobileMenuOpen ? 'auto' : 0 }}
         transition={{ duration: 0.3 }}
         className="md:hidden border-b overflow-hidden"
-        style={{ backgroundColor: COLORS.deepTeal, borderColor: COLORS.gold }}
+        style={{ backgroundColor: COLORS.gold, borderColor: COLORS.deepTeal }}
       >
         <div className="px-4 py-4 space-y-3">
           {NAV_LINKS.map((link) => (
@@ -130,7 +130,7 @@ function Navigation() {
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-2 text-sm font-medium tracking-wide uppercase rounded transition-colors"
-              style={{ color: COLORS.ivory }}
+              style={{ color: COLORS.deepTeal }}
             >
               {link.label}
             </Link>
