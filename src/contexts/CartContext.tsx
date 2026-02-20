@@ -1,6 +1,15 @@
 'use client';
 
-import { createContext, useContext, useReducer, ReactNode } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useEffect, useState } from 'react';
+import { 
+  getOrCreateCheckout, 
+  addLineItemsToCheckout,
+  removeLineItemFromCheckout,
+  updateLineItemQuantity,
+  redirectToCheckout,
+  isShopifyConfigured,
+  type ShopifyCheckout 
+} from '@/lib/shopify';
 
 export interface CartItem {
   id: number;
@@ -9,11 +18,16 @@ export interface CartItem {
   image: string;
   quantity: number;
   category: string;
+  variantId?: string; // Shopify variant ID
+  shopifyLineItemId?: string; // Shopify checkout line item ID
 }
 
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
+  shopifyCheckout: ShopifyCheckout | null;
+  isShopifyEnabled: boolean;
+  isLoading: boolean;
 }
 
 type CartAction =
@@ -21,12 +35,17 @@ type CartAction =
   | { type: 'REMOVE_ITEM'; payload: number }
   | { type: 'UPDATE_QUANTITY'; payload: { id: number; quantity: number } }
   | { type: 'CLEAR_CART' }
-  | { type: 'TOGGLE_CART' };
+  | { type: 'TOGGLE_CART' }
+  | { type: 'SET_SHOPIFY_CHECKOUT'; payload: ShopifyCheckout | null }
+  | { type: 'SET_LOADING'; payload: boolean };
 
-const CartContext = createContext<{
+interface CartContextType {
   state: CartState;
   dispatch: React.Dispatch<CartAction>;
-} | null>(null);
+  proceedToCheckout: () => Promise<void>;
+}
+
+const CartContext = createContext<CartContextType | null>(null);
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
@@ -71,6 +90,16 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         ...state,
         isOpen: !state.isOpen,
       };
+    case 'SET_SHOPIFY_CHECKOUT':
+      return {
+        ...state,
+        shopifyCheckout: action.payload,
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     default:
       return state;
   }
@@ -80,10 +109,79 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, {
     items: [],
     isOpen: false,
+    shopifyCheckout: null,
+    isShopifyEnabled: isShopifyConfigured(),
+    isLoading: false,
   });
 
+  // Initialize Shopify checkout on mount if Shopify is configured
+  useEffect(() => {
+    if (state.isShopifyEnabled) {
+      initializeShopifyCheckout();
+    }
+  }, [state.isShopifyEnabled]);
+
+  // Sync cart with Shopify when items change
+  useEffect(() => {
+    if (state.isShopifyEnabled && state.shopifyCheckout) {
+      syncCartWithShopify();
+    }
+  }, [state.items]);
+
+  const initializeShopifyCheckout = async () => {
+    try {
+      const checkout = await getOrCreateCheckout();
+      if (checkout) {
+        dispatch({ type: 'SET_SHOPIFY_CHECKOUT', payload: checkout });
+      }
+    } catch (error) {
+      console.error('Failed to initialize Shopify checkout:', error);
+    }
+  };
+
+  const syncCartWithShopify = async () => {
+    if (!state.shopifyCheckout || state.isLoading) return;
+
+    dispatch({ type: 'SET_LOADING', payload: true });
+
+    try {
+      // Add new items to Shopify checkout
+      const newItems = state.items.filter(item => !item.shopifyLineItemId && item.variantId);
+      
+      if (newItems.length > 0) {
+        const lineItems = newItems.map(item => ({
+          variantId: item.variantId!,
+          quantity: item.quantity,
+        }));
+        
+        const updatedCheckout = await addLineItemsToCheckout(
+          state.shopifyCheckout.id,
+          lineItems
+        );
+        
+        if (updatedCheckout) {
+          dispatch({ type: 'SET_SHOPIFY_CHECKOUT', payload: updatedCheckout });
+        }
+      }
+    } catch (error) {
+      console.error('Failed to sync cart with Shopify:', error);
+    } finally {
+      dispatch({ type: 'SET_LOADING', payload: false });
+    }
+  };
+
+  const proceedToCheckout = async () => {
+    if (state.isShopifyEnabled && state.shopifyCheckout) {
+      // Redirect to Shopify checkout
+      redirectToCheckout(state.shopifyCheckout.webUrl);
+    } else {
+      // Fallback: show alert or custom checkout
+      alert('Checkout functionality requires Shopify configuration. Please add your Shopify credentials to .env.local');
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, proceedToCheckout }}>
       {children}
     </CartContext.Provider>
   );

@@ -15,8 +15,8 @@ const COLORS = {
 };
 
 export function ShoppingCart() {
-  const { state, dispatch } = useCart();
-  const { items, isOpen } = state;
+  const { state, dispatch, proceedToCheckout } = useCart();
+  const { items, isOpen, isLoading } = state;
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => {
@@ -140,10 +140,12 @@ export function ShoppingCart() {
 
                 <div className="space-y-3">
                   <button
-                    className="w-full py-3 px-4 rounded-lg font-medium transition-all"
+                    onClick={proceedToCheckout}
+                    disabled={isLoading}
+                    className="w-full py-3 px-4 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
                   >
-                    Proceed to Checkout
+                    {isLoading ? 'Processing...' : 'Proceed to Checkout'}
                   </button>
                   <button
                     onClick={() => dispatch({ type: 'CLEAR_CART' })}

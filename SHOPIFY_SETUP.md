@@ -1,324 +1,250 @@
 # Shopify Integration Setup Guide
 
-This guide walks you through setting up Shopify API integration with your e-commerce website.
-
 ## Overview
 
-This integration allows you to:
-- **Sync products** from your Shopify store to your database
-- **Handle checkout** through Shopify (payment processing)
-- **Keep custom features**: reviews, wishlist, admin dashboard, and more
-- **Hybrid approach**: Your site displays products, Shopify handles payments
+Your website is now configured to work with Shopify's Storefront API. This means you can:
+- Keep your beautiful custom design
+- Manage products in Shopify Admin
+- Use Shopify's professional checkout
+- Handle payments, shipping, and taxes through Shopify
+- Track orders and inventory
 
-## Prerequisites
+## 🚀 Quick Start (5 Steps)
 
-1. An active Shopify store (free trial available at shopify.com)
-2. Node.js and npm installed locally
-3. Access to your Shopify admin panel
+### Step 1: Create a Shopify Store
 
-## Step 1: Create Shopify App & Get Credentials
+1. Go to [https://www.shopify.com/](https://www.shopify.com/)
+2. Click "Start free trial"
+3. Follow the signup process
+4. Complete your store setup (you'll get something like: `your-store-name.myshopify.com`)
 
-### 1a. Create a Private App (or Custom App)
+**Pricing:** Plans start at $29/month (Basic) after the free trial.
 
-1. Go to your Shopify Admin: `https://your-store.myshopify.com/admin`
-2. Navigate to: **Settings** → **Apps and integrations** → **Develop apps**
-3. Click **Create an app** → Name it (e.g., "Website Integration")
-4. In the app settings, go to **Configuration**
-5. Under **Admin API scopes**, enable:
-   - `read_products`
-   - `write_products`
-   - `read_orders`
-   - `write_orders`
-   - `read_checkouts` (if available)
-   - `write_checkouts` (if available)
+---
 
-### 1b. Get Your Storefront Access Token
+### Step 2: Create a Custom App for API Access
 
-1. Still in your app settings, find **Storefront API access scopes**
-2. Enable:
-   - `unauthenticated_read_products`
-   - `unauthenticated_read_product_variants`
-   - `unauthenticated_read_checkouts`
-   - `unauthenticated_write_checkouts`
-3. Save and install the app
-4. Click **Reveal token** to get your **Storefront Access Token**
-5. Copy both:
-   - Your store name (e.g., `my-awesome-store` from `my-awesome-store.myshopify.com`)
-   - Your Storefront Access Token (a long string)
+1. In your Shopify Admin, go to **Settings** (bottom left)
+2. Click **Apps and sales channels**
+3. Click **Develop apps** (top right)
+4. Click **Create an app**
+5. Name it something like "Website Storefront"
+6. Click **Create app**
 
-## Step 2: Configure Environment Variables
+---
 
-Create or update your `.env.local` file with:
+### Step 3: Configure Storefront API Permissions
+
+1. In your new app, click **Configuration**
+2. Under **Storefront API**, click **Configure**
+3. Enable these scopes (checkboxes):
+   - ✅ `unauthenticated_read_product_listings`
+   - ✅ `unauthenticated_read_product_inventory`
+   - ✅ `unauthenticated_read_product_tags`
+   - ✅ `unauthenticated_write_checkouts`
+   - ✅ `unauthenticated_read_checkouts`
+4. Click **Save**
+
+---
+
+### Step 4: Install App and Get API Token
+
+1. Click **API credentials** tab
+2. Click **Install app**
+3. Click **Install** to confirm
+4. You'll see **Storefront API access token** - copy this token
+5. ⚠️ **IMPORTANT:** Save this token somewhere safe - you can't see it again!
+
+---
+
+### Step 5: Add Credentials to Your Website
+
+1. In your project, create a file called `.env.local` (if it doesn't exist)
+2. Add these lines:
 
 ```env
 # Shopify Configuration
-SHOPIFY_STORE_NAME=your-store-name
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token-here
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store-name.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_storefront_access_token_here
 ```
 
-### Example:
+3. Replace:
+   - `your-store-name.myshopify.com` with your actual store domain
+   - `your_storefront_access_token_here` with the token from Step 4
 
-```env
-SHOPIFY_STORE_NAME=radhikas-homekraft
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=cd1b23a456b789c0d1e2f3456a7b8c9d
-```
-
-## Step 3: Update Database Schema
-
-Run Prisma migration to add Shopify fields:
-
-```bash
-npx prisma migrate dev --name add_shopify_fields
-```
-
-This adds these fields to your database:
-- **Product model**: `shopifyId`, `shopifyProductHandle`, `maxPrice`
-- **Order model**: `shopifyCheckoutId`
-
-## Step 4: Sync Products from Shopify
-
-### Via API Endpoint (Recommended)
-
-1. **Start your dev server**:
+4. Save the file and restart your development server:
    ```bash
    npm run dev
    ```
 
-2. **Trigger sync** using your admin dashboard or API:
-   ```bash
-   curl -X POST http://localhost:3000/api/shopify/sync \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer YOUR_SESSION_TOKEN"
-   ```
+---
 
-   Or use the admin dashboard to trigger it from:
-   - **Admin Panel** → **Settings** → **Sync Products**
+## 📦 Adding Products to Shopify
 
-3. **Check sync status**:
-   ```bash
-   curl http://localhost:3000/api/shopify/sync
-   ```
+### Method 1: Manually in Shopify Admin
 
-### Response Example
+1. In Shopify Admin, go to **Products**
+2. Click **Add product**
+3. Fill in:
+   - **Title**: Product name (e.g., "Blue Block Print Bedsheet")
+   - **Description**: Product details
+   - **Price**: ₹2,570
+   - **Images**: Upload product photos
+   - **Inventory**: Set quantity
+   - **Tags**: Add category tags (e.g., "bedsheets", "block-print")
+4. Click **Save**
 
-```json
-{
-  "success": true,
-  "message": "Synced 25 products from Shopify",
-  "synced": 25,
-  "errors": null,
-  "total": 25
-}
-```
+### Organizing Products by Collection
 
-## Step 5: Update Product Pages for Shopify Checkout
+For your categories (Lamps, Bedsheets, Furniture, etc.):
 
-Update your product page to use Shopify checkout:
+1. Go to **Products** > **Collections**
+2. Click **Create collection**
+3. Name it (e.g., "Sīvana Bedsheets")
+4. Add products to the collection
 
-```typescript
-import { useShopifyCheckout } from '@/hooks/useShopifyCheckout';
+### Tagging Strategy
 
-export default function ProductPage() {
-  const { createCheckout, isLoading } = useShopifyCheckout();
+In Shopify, tag your products with:
+- `bedsheets` - for Sīvana collection
+- `lamps` - for Prākharya collection
+- `furniture` - for GrihaKalā collection
+- `ceramics` - for Amala collection
+- `gifting` - for Punīta collection
 
-  const handleBuyNow = async () => {
-    await createCheckout([
-      {
-        productId: product.id,
-        variantId: product.variants[0].id,
-        quantity: 1,
-      },
-    ]);
-  };
+---
 
-  return (
-    <button onClick={handleBuyNow} disabled={isLoading}>
-      {isLoading ? 'Processing...' : 'Buy Now'}
-    </button>
-  );
-}
-```
+## 🔗 How Products Appear on Your Website
 
-## Step 6: Update Cart for Shopify Checkout
+### Current Setup (Fallback Mode)
 
-Similarly, update your cart component to use Shopify checkout:
+Right now, your website shows **hardcoded products** because Shopify isn't configured yet. This is intentional - your site works without Shopify!
 
-```typescript
-const { createCheckout, isLoading } = useShopifyCheckout();
+### After Shopify Setup
 
-const handleCheckout = async () => {
-  const items = cart.map((item) => ({
-    productId: item.productId,
-    variantId: item.variantId,
-    quantity: item.quantity,
-  }));
+Once you add the credentials to `.env.local`:
+1. Products will automatically load from Shopify
+2. Inventory will stay in sync
+3. Cart will integrate with Shopify checkout
+4. Customers will go to Shopify's secure checkout page
 
-  await createCheckout(items);
-};
-```
+---
 
-## Step 7: Handle Post-Checkout Redirect
+## 🛒 Testing the Integration
 
-After users complete checkout on Shopify, they'll be redirected back to your site. Create a callback page:
+### 1. Verify Configuration
 
-**`src/app/checkout-success/page.tsx`**:
+Open your browser console and check for:
+- ✅ No Shopify errors
+- ✅ Products loading from Shopify
+- ✅ Cart syncing properly
+
+### 2. Test Add to Cart
+
+1. Browse a product
+2. Click "Add to Cart"
+3. Open cart sidebar
+4. Verify product appears
+
+### 3. Test Checkout
+
+1. Add items to cart
+2. Click "Proceed to Checkout"
+3. You should be redirected to: `your-store.myshopify.com/checkout/...`
+4. Complete test purchase using Shopify test cards
+
+---
+
+## 🔧 Advanced Configuration
+
+### Example: Update Collection Page to Use Shopify
+
+Update `/src/app/collections/bedsheets/page.tsx`:
 
 ```typescript
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { fetchProductsByTag, convertShopifyProduct } from '@/lib/shopify';
 
-export default function CheckoutSuccessPage() {
-  const searchParams = useSearchParams();
-  const [orderStatus, setOrderStatus] = useState('processing');
+export default function BedsheetsCollection() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkoutId = searchParams.get('checkout_id');
-    if (checkoutId) {
-      // Update order status in your system
-      fetch('/api/shopify/checkout/confirm', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          checkoutId,
-          orderStatus: 'completed',
-        }),
-      });
+    async function loadProducts() {
+      const shopifyProducts = await fetchProductsByTag('bedsheets');
+      const converted = shopifyProducts.map(convertShopifyProduct);
+      setProducts(converted.length > 0 ? converted : fallbackProducts);
+      setLoading(false);
     }
-  }, [searchParams]);
+    loadProducts();
+  }, []);
 
-  return (
-    <div className="m-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1 className="text-3xl font-bold">Order Confirmed!</h1>
-      <p>Thank you for your purchase. Your order is being processed.</p>
-    </div>
-  );
+  // Fallback products (your current hardcoded products)
+  const fallbackProducts = [
+    // ... your existing products
+  ];
+
+  if (loading) return <div>Loading products...</div>;
+  
+  // Rest of your component...
 }
 ```
 
-## Step 8: Test Everything
+---
 
-### Test Product Sync
-1. Go to admin panel
-2. Click "Sync Products" button
-3. Verify products appear in your database
+## 🐛 Troubleshooting
 
-### Test Checkout
-1. Browse to a product page
-2. Click "Buy Now"
-3. You should be redirected to Shopify checkout
-4. Complete payment (use test card: 4242 4242 4242 4242)
-5. Should be redirected back to your site
+### "Shopify client not initialized"
 
-### Verify Order Status
-1. Check your database: products should have `shopifyId` and `shopifyProductHandle`
-2. Check orders: should have `shopifyCheckoutId` populated
+**Solution:** Check your `.env.local` file has the correct credentials.
 
-## API Endpoints Reference
+### Products not showing
 
-### GET /api/shopify/sync
-Get product sync status
-
-```bash
-curl http://localhost:3000/api/shopify/sync
-```
-
-Response:
-```json
-{
-  "shopifySyncedProducts": 25,
-  "totalProducts": 30,
-  "syncPercentage": "83.3"
-}
-```
-
-### POST /api/shopify/sync
-Sync products from Shopify (Admin only)
-
-```bash
-curl -X POST http://localhost:3000/api/shopify/sync \
-  -H "Content-Type: application/json"
-```
-
-### POST /api/shopify/checkout
-Create checkout and redirect to Shopify
-
-```bash
-curl -X POST http://localhost:3000/api/shopify/checkout \
-  -H "Content-Type: application/json" \
-  -d '{
-    "items": [
-      {
-        "productId": "prod_123",
-        "variantId": "var_456",
-        "quantity": 1
-      }
-    ]
-  }'
-```
-
-Response:
-```json
-{
-  "success": true,
-  "checkoutUrl": "https://your-store.myshopify.com/checkout/...",
-  "orderId": "order_789"
-}
-```
-
-### PATCH /api/shopify/checkout
-Confirm checkout completion
-
-```bash
-curl -X PATCH http://localhost:3000/api/shopify/checkout \
-  -H "Content-Type: application/json" \
-  -d '{
-    "checkoutId": "gid://shopify/Checkout/...",
-    "orderStatus": "completed"
-  }'
-```
-
-## Troubleshooting
-
-### "Shopify not configured" error
-- Verify `SHOPIFY_STORE_NAME` and `SHOPIFY_STOREFRONT_ACCESS_TOKEN` are set in `.env.local`
-- Check they don't have extra spaces or quotes
-- Restart dev server after updating env vars
-
-### Products not syncing
-- Ensure your Shopify app has correct API scopes enabled
-- Check Shopify admin panel for any errors
-- Verify you have products in your Shopify store
+**Solutions:**
+1. Verify products are published in Shopify (not in draft mode)
+2. Check product tags match your filter (e.g., 'bedsheets')
+3. Ensure products are available for "Online Store" sales channel
 
 ### Checkout not working
-- Confirm Storefront Access Token is correct
-- Check browser console for error messages
-- Verify product variants are available in Shopify
 
-### "Product variant not found" error
-- Make sure product variants exist in Shopify
-- Check that `variantId` is being passed correctly
-- Variant ID format should be like `gid://shopify/ProductVariant/123456789`
+**Solutions:**
+1. Verify checkout scopes are enabled in your app
+2. Check browser console for errors
+3. Ensure you've installed the app (Step 4)
 
-## Next Steps
+---
 
-1. Configure return/callback URL in Shopify if needed
-2. Set up Shopify webhook for order confirmations (optional)
-3. Customize post-checkout flow
-4. Test with real products and payments
-5. Deploy to production
+## ✅ Checklist Before Going Live
 
-## Additional Resources
+- [ ] Shopify store created
+- [ ] Products added with proper tags
+- [ ] Custom app created with Storefront API access
+- [ ] API credentials added to `.env.local`
+- [ ] Website tested locally with Shopify products
+- [ ] Test purchase completed successfully
+- [ ] Inventory quantities set correctly
+- [ ] Shipping rates configured in Shopify
+- [ ] Payment provider connected (Shopify Payments, Stripe, etc.)
+- [ ] Tax settings configured for India
+- [ ] `.env.local` added to `.gitignore` (never commit API tokens!)
 
-- [Shopify API Docs](https://shopify.dev/api/storefront)
-- [Shopify GraphQL API Explorer](https://shopify.dev/api/storefront/current)
-- [Prisma Migration Docs](https://www.prisma.io/docs/concepts/components/prisma-migrate)
+---
 
-## Support
+## 🎉 You're All Set!
 
-For issues or questions:
-1. Check Shopify admin panel error logs
-2. Review API endpoint responses
-3. Check browser console for frontend errors
-4. Review server logs in terminal
+Once configured, your website will:
+- Display real products from Shopify
+- Keep inventory in sync
+- Process secure payments through Shopify
+- Maintain your beautiful custom design
+
+Customers will enjoy the best of both worlds: your unique design + Shopify's reliable e-commerce backend!
+
+## 📚 Resources
+
+- [Shopify Storefront API Docs](https://shopify.dev/docs/api/storefront)
+- [Shopify Help Center](https://help.shopify.com/)
+- Your Shopify utilities: `src/lib/shopify/`
+- Configuration file: `src/config/shopify.ts`
