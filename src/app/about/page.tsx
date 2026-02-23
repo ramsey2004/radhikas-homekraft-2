@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+// Build trigger: Force Vercel to fetch latest
 import { motion } from 'framer-motion';
 import { Users, Award, Heart, MapPin, Clock } from 'lucide-react';
 
