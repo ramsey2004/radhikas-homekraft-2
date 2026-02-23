@@ -6,6 +6,8 @@ import {
   getOftenBoughtTogether,
 } from '@/lib/ecommerce';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Recommendations API
  * GET /api/recommendations/products/:id - Similar products

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { searchProducts, getAutocompleteSuggestions } from '@/lib/ecommerce';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Search API
  * GET /api/search - Full-text search with filters

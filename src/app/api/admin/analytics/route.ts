@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchAnalytics, exportOrders, generateInvoice } from '@/lib/admin';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Admin Analytics & Exports API
  * GET /api/admin/analytics - Get business metrics
