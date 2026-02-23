@@ -1,4 +1,3 @@
-// Cache bust: 2026-02-23
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
