@@ -11,10 +11,10 @@ import { useSearch } from '@/contexts/SearchContext';
 // Navigation Links - Updated categories for main navigation
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Bed & Linen', href: '/collections/bed-linen' },
-  { label: 'Dining & Serving', href: '/collections/dining-serving' },
-  { label: 'Drinkware', href: '/collections/drinkware' },
-  { label: 'Decor & Lighting', href: '/collections/decor-lighting' },
+  { label: 'Bed & Linen', href: '/collections/bedsheets' },
+  { label: 'Dining & Serving', href: '/collections/ceramics' },
+  { label: 'Drinkware', href: '/collections/ceramics' },
+  { label: 'Decor & Lighting', href: '/collections/lamps' },
   { label: 'Gifting', href: '/collections/gifting' },
   { label: 'B2B', href: '/b2b' },
 ];
