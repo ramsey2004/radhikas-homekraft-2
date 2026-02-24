@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 import { useSearch } from '@/contexts/SearchContext';
 
-// Navigation Links - Updated categories for main navigation
+// Navigation Links - Luxury brand navigation
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Bed & Linen', href: '/collections/bedsheets' },
@@ -17,20 +17,12 @@ const NAV_LINKS = [
   { label: 'Decor & Lighting', href: '/collections/lamps' },
   { label: 'Gifting', href: '/collections/gifting' },
   { label: 'B2B', href: '/b2b' },
+  { label: 'About', href: '/about' },
+  { label: 'Visit Store', href: '/visit-store' },
 ];
 
-// Color Scheme
-const COLORS = {
-  deepTeal: '#1A7A6E',
-  gold: '#C9A84C',
-  ivory: '#FAF3E0',
-  charcoal: '#2D2D2D',
-  lightBeige: '#E8D5C4',
-  darkTeal: '#2D5252',
-};
-
 /**
- * Modern Navigation Bar Component
+ * Minimal Luxury Navigation Bar
  */
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,63 +32,59 @@ function Navigation() {
 
   return (
     <>
-      {/* Modern Sticky Nav */}
+      {/* Clean White Navigation */}
       <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 backdrop-blur-sm border-b"
-        style={{ backgroundColor: COLORS.gold, borderColor: COLORS.deepTeal }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200"
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            {/* Logo - Minimal */}
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <motion.span 
-                whileHover={{ scale: 1.05 }}
-                className="text-lg sm:text-xl font-semibold tracking-widest"
-                style={{ color: COLORS.deepTeal }}
+                whileHover={{ opacity: 0.7 }}
+                transition={{ duration: 0.2 }}
+                className="text-2xl font-light tracking-[0.3em] text-gray-900"
               >
                 RADHIKA'S
               </motion.span>
             </Link>
 
-            {/* Desktop Menu - Centered */}
-            <div className="hidden md:flex items-center gap-4 lg:gap-6 absolute left-1/2 transform -translate-x-1/2">
-              {NAV_LINKS.map((link) => (
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+              {NAV_LINKS.slice(0, 7).map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[10px] sm:text-xs lg:text-sm font-medium tracking-wide uppercase relative group whitespace-nowrap"
-                  style={{ color: COLORS.deepTeal }}
+                  className="text-xs font-normal tracking-widest uppercase text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300" style={{ backgroundColor: COLORS.deepTeal }} />
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-gray-900 group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
             </div>
 
-            {/* Icons - Right */}
-            <div className="flex items-center gap-3 sm:gap-4">
+            {/* Right Icons */}
+            <div className="flex items-center gap-6">
               <motion.button 
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 transition-colors"
-                style={{ color: COLORS.deepTeal }}
+                className="text-gray-700 hover:text-gray-900 transition-colors"
               >
-                <Search size={18} className="sm:w-5 sm:h-5" />
+                <Search className="w-5 h-5" />
               </motion.button>
               <motion.button 
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => dispatch({ type: 'TOGGLE_CART' })}
-                className="p-2 transition-colors relative"
-                style={{ color: COLORS.deepTeal }}
+                className="text-gray-700 hover:text-gray-900 transition-colors relative"
               >
-                <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
+                <ShoppingBag className="w-5 h-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-gray-900 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-medium">
                     {totalItems}
                   </span>
                 )}
@@ -104,35 +92,32 @@ function Navigation() {
 
               {/* Mobile Menu Button */}
               <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 transition-colors"
-                style={{ color: COLORS.deepTeal }}
+                className="lg:hidden text-gray-700"
               >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </motion.button>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: mobileMenuOpen ? 1 : 0, height: mobileMenuOpen ? 'auto' : 0 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden border-b overflow-hidden"
-        style={{ backgroundColor: COLORS.gold, borderColor: COLORS.deepTeal }}
+        className="lg:hidden bg-white border-b border-gray-200 overflow-hidden"
       >
-        <div className="px-4 py-4 space-y-3">
+        <div className="px-6 py-6 space-y-4">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-medium tracking-wide uppercase rounded transition-colors"
-              style={{ color: COLORS.deepTeal }}
+              className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors"
             >
               {link.label}
             </Link>

@@ -4,10 +4,14 @@
 
 :root {
   --radius: 0.5rem;
+  /* Luxury brand spacing variables */
+  --section-spacing-sm: 5rem;  /* 80px */
+  --section-spacing-md: 6rem;  /* 96px */
+  --section-spacing-lg: 7.5rem; /* 120px */
 }
 
 * {
-  @apply border-primary-400;
+  @apply border-gray-200;
 }
 
 html {
@@ -15,7 +19,20 @@ html {
 }
 
 body {
-  @apply font-sans antialiased;
+  @apply font-sans antialiased text-gray-900;
+  font-weight: 300; /* Light font weight for luxury feel */
+  letter-spacing: 0.01em;
+}
+
+/* Luxury spacing utilities */
+@layer utilities {
+  .section-spacing {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+  
+  .luxury-spacing {
+    @apply py-24 md:py-32 lg:py-40;
+  }
 }
 
 /* Custom scrollbar */
