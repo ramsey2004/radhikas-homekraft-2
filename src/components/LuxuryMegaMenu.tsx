@@ -17,12 +17,16 @@ interface SubLink {
   href: string;
 }
 
+interface MenuSection {
+  title: string;
+  links: SubLink[];
+}
+
 interface MegaMenuCategory {
   label: string;
   href: string;
   moodText: string;
-  shopByCategory: SubLink[];
-  curatedEdits: SubLink[];
+  sections: MenuSection[];
   featuredImage?: string;
 }
 
@@ -31,17 +35,32 @@ const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     label: 'Bed & Linen',
     href: '/collections/bedsheets',
     moodText: 'Elevated comfort rooted in craftsmanship.',
-    shopByCategory: [
-      { label: 'Bed Sheet Sets', href: '/collections/bedsheets' },
-      { label: 'Dohars & Quilts', href: '/collections/quilts' },
-      { label: 'Cushion Covers', href: '/collections/cushions' },
-      { label: 'Throws & Blankets', href: '/collections/throws' },
-    ],
-    curatedEdits: [
-      { label: 'The Signature Bedroom', href: '/collections/signature-bedroom' },
-      { label: 'Festive Linen', href: '/collections/festive-linen' },
-      { label: 'Wedding Favourites', href: '/collections/wedding-favourites' },
-      { label: 'Limited Editions', href: '/collections/limited-editions' },
+    sections: [
+      {
+        title: 'Shop By Category',
+        links: [
+          { label: 'Bed Sheet Sets', href: '/collections/bedsheets' },
+          { label: 'Dohars & Quilts', href: '/collections/quilts' },
+          { label: 'Cushion Covers', href: '/collections/cushions' },
+          { label: 'Throws & Blankets', href: '/collections/throws' },
+        ]
+      },
+      {
+        title: 'Curated Edits',
+        links: [
+          { label: 'The Signature Bedroom', href: '/collections/signature-bedroom' },
+          { label: 'Festive Linen', href: '/collections/festive-linen' },
+          { label: 'Wedding Favourites', href: '/collections/wedding-favourites' },
+          { label: 'Limited Editions', href: '/collections/limited-editions' },
+        ]
+      },
+      {
+        title: 'Explore',
+        links: [
+          { label: 'Styling Guide', href: '/guides/bedroom-styling' },
+          { label: 'Care Instructions', href: '/guides/linen-care' },
+        ]
+      }
     ],
     featuredImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=600&fit=crop',
   },
@@ -49,17 +68,32 @@ const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     label: 'Dining & Serving',
     href: '/collections/ceramics',
     moodText: 'Designed for gatherings that linger.',
-    shopByCategory: [
-      { label: 'Plates & Bowls', href: '/collections/plates-bowls' },
-      { label: 'Dinner Sets', href: '/collections/dinner-sets' },
-      { label: 'Serving Platters', href: '/collections/serving-platters' },
-      { label: 'Table Runners & Mats', href: '/collections/table-linens' },
-    ],
-    curatedEdits: [
-      { label: "The Host's Table", href: '/collections/hosts-table' },
-      { label: 'Festive Dining', href: '/collections/festive-dining' },
-      { label: 'Signature Ensembles', href: '/collections/signature-ensembles' },
-      { label: 'Gifting Picks', href: '/collections/gifting-picks' },
+    sections: [
+      {
+        title: 'Shop By Category',
+        links: [
+          { label: 'Plates & Bowls', href: '/collections/plates-bowls' },
+          { label: 'Dinner Sets', href: '/collections/dinner-sets' },
+          { label: 'Serving Platters', href: '/collections/serving-platters' },
+          { label: 'Table Runners & Mats', href: '/collections/table-linens' },
+        ]
+      },
+      {
+        title: 'Curated Edits',
+        links: [
+          { label: "The Host's Table", href: '/collections/hosts-table' },
+          { label: 'Festive Dining', href: '/collections/festive-dining' },
+          { label: 'Intimate Evenings', href: '/collections/intimate-evenings' },
+          { label: 'Signature Ensembles', href: '/collections/signature-ensembles' },
+        ]
+      },
+      {
+        title: 'Explore',
+        links: [
+          { label: 'Table Styling Guide', href: '/guides/table-styling' },
+          { label: 'Gifting Recommendations', href: '/guides/dining-gifts' },
+        ]
+      }
     ],
     featuredImage: 'https://images.unsplash.com/photo-1615485925774-3e9f6c49a3db?w=400&h=600&fit=crop',
   },
@@ -67,17 +101,24 @@ const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     label: 'Drinkware',
     href: '/collections/ceramics',
     moodText: 'Crafted for everyday rituals.',
-    shopByCategory: [
-      { label: 'Mugs & Cups', href: '/collections/mugs' },
-      { label: 'Tea & Coffee Sets', href: '/collections/tea-sets' },
-      { label: 'Glasses & Tumblers', href: '/collections/glasses' },
-      { label: 'Water Bottles', href: '/collections/water-bottles' },
-    ],
-    curatedEdits: [
-      { label: 'Morning Rituals', href: '/collections/morning-rituals' },
-      { label: 'Tea Time Essentials', href: '/collections/tea-time' },
-      { label: 'Gifting Selection', href: '/collections/drinkware-gifts' },
-      { label: 'New Arrivals', href: '/collections/drinkware-new' },
+    sections: [
+      {
+        title: 'Shop By Category',
+        links: [
+          { label: 'Mugs', href: '/collections/mugs' },
+          { label: 'Tea Sets', href: '/collections/tea-sets' },
+          { label: 'Glassware', href: '/collections/glasses' },
+          { label: 'Beverage Sets', href: '/collections/beverage-sets' },
+        ]
+      },
+      {
+        title: 'Curated Edits',
+        links: [
+          { label: 'Morning Rituals', href: '/collections/morning-rituals' },
+          { label: 'Evening Conversations', href: '/collections/evening-conversations' },
+          { label: 'Gifting Picks', href: '/collections/drinkware-gifts' },
+        ]
+      }
     ],
     featuredImage: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=600&fit=crop',
   },
@@ -85,17 +126,24 @@ const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     label: 'Decor & Lighting',
     href: '/collections/lamps',
     moodText: 'Thoughtful pieces for elevated spaces.',
-    shopByCategory: [
-      { label: 'Lamps', href: '/collections/lamps' },
-      { label: 'Candle Holders', href: '/collections/candle-holders' },
-      { label: 'Wall Art', href: '/collections/wall-art' },
-      { label: 'Vases & Planters', href: '/collections/vases' },
-    ],
-    curatedEdits: [
-      { label: 'Statement Pieces', href: '/collections/statement-decor' },
-      { label: 'Ambient Lighting', href: '/collections/ambient-lighting' },
-      { label: 'Artisan Collection', href: '/collections/artisan-decor' },
-      { label: 'Seasonal Favorites', href: '/collections/seasonal-decor' },
+    sections: [
+      {
+        title: 'Shop By Category',
+        links: [
+          { label: 'Table Lamps', href: '/collections/table-lamps' },
+          { label: 'Floor Lamps', href: '/collections/floor-lamps' },
+          { label: 'Wall Accents', href: '/collections/wall-accents' },
+          { label: 'Rugs', href: '/collections/rugs' },
+        ]
+      },
+      {
+        title: 'Curated Edits',
+        links: [
+          { label: 'Statement Pieces', href: '/collections/statement-decor' },
+          { label: 'Heritage Classics', href: '/collections/heritage-classics' },
+          { label: 'New Arrivals', href: '/collections/decor-new' },
+        ]
+      }
     ],
     featuredImage: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=600&fit=crop',
   },
@@ -103,19 +151,74 @@ const MEGA_MENU_DATA: Record<string, MegaMenuCategory> = {
     label: 'Gifting',
     href: '/collections/gifting',
     moodText: 'Thoughtfully curated for every occasion.',
-    shopByCategory: [
-      { label: 'Gift Sets', href: '/collections/gift-sets' },
-      { label: 'Wedding Gifts', href: '/collections/wedding-gifts' },
-      { label: 'Corporate Gifting', href: '/collections/corporate-gifts' },
-      { label: 'Festive Collection', href: '/collections/festive-gifts' },
-    ],
-    curatedEdits: [
-      { label: 'Luxury Hampers', href: '/collections/luxury-hampers' },
-      { label: 'Custom Gifts', href: '/collections/custom-gifts' },
-      { label: 'Under ₹2000', href: '/collections/gifts-under-2000' },
-      { label: 'Premium Selection', href: '/collections/premium-gifts' },
+    sections: [
+      {
+        title: 'By Occasion',
+        links: [
+          { label: 'Wedding Gifting', href: '/collections/wedding-gifts' },
+          { label: 'Housewarming', href: '/collections/housewarming' },
+          { label: 'Festive Hampers', href: '/collections/festive-hampers' },
+          { label: 'Corporate Gifting', href: '/collections/corporate-gifts' },
+        ]
+      },
+      {
+        title: 'Curated Sets',
+        links: [
+          { label: 'Bedroom Ensembles', href: '/collections/bedroom-gift-sets' },
+          { label: 'Dining Collections', href: '/collections/dining-gift-sets' },
+          { label: 'Custom Hampers', href: '/collections/custom-hampers' },
+        ]
+      }
     ],
     featuredImage: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=600&fit=crop',
+  },
+  B2B: {
+    label: 'B2B',
+    href: '/b2b',
+    moodText: 'Partnerships built on craft and quality.',
+    sections: [
+      {
+        title: 'Services',
+        links: [
+          { label: 'Bulk Orders', href: '/b2b/bulk-orders' },
+          { label: 'Wedding Planners', href: '/b2b/wedding-planners' },
+          { label: 'Interior Designers', href: '/b2b/interior-designers' },
+          { label: 'Hospitality Partnerships', href: '/b2b/hospitality' },
+          { label: 'Customisation Requests', href: '/b2b/customisation' },
+        ]
+      }
+    ],
+  },
+  About: {
+    label: 'About',
+    href: '/about',
+    moodText: 'Craft, tradition, and conscious design.',
+    sections: [
+      {
+        title: 'Discover',
+        links: [
+          { label: 'Our Story', href: '/about#story' },
+          { label: 'Craft & Artisans', href: '/about#artisans' },
+          { label: 'Sustainability', href: '/about#sustainability' },
+          { label: 'Press & Features', href: '/about#press' },
+        ]
+      }
+    ],
+  },
+  'Visit Store': {
+    label: 'Visit Store',
+    href: '/visit-store',
+    moodText: 'Experience our collections in person.',
+    sections: [
+      {
+        title: 'Store Details',
+        links: [
+          { label: 'Jaipur Flagship', href: '/visit-store#jaipur' },
+          { label: 'Store Gallery', href: '/visit-store#gallery' },
+          { label: 'Timings & Directions', href: '/visit-store#directions' },
+        ]
+      }
+    ],
   },
 };
 
@@ -126,6 +229,9 @@ interface MegaMenuItemProps {
 }
 
 function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
+  const hasImage = !!category.featuredImage;
+  const gridCols = hasImage ? 'grid-cols-4' : 'grid-cols-3';
+  
   return (
     <AnimatePresence>
       {isOpen && (
@@ -139,9 +245,9 @@ function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
           onMouseLeave={onClose}
         >
           <div className="mx-auto max-w-7xl px-8 py-16">
-            <div className="grid grid-cols-4 gap-12">
+            <div className={`grid ${gridCols} gap-12`}>
               {/* Column 1: Brand Mood Block */}
-              <div className="border-r" style={{ borderColor: COLORS.gold }}>
+              <div className="border-r pr-8" style={{ borderColor: COLORS.gold }}>
                 <h3 
                   className="text-3xl mb-3 font-serif"
                   style={{ color: COLORS.deepTeal }}
@@ -156,7 +262,7 @@ function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
                 </p>
                 <Link
                   href={category.href}
-                  className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-70"
                   style={{ color: COLORS.deepTeal }}
                   onClick={onClose}
                 >
@@ -164,63 +270,43 @@ function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
                 </Link>
               </div>
 
-              {/* Column 2: Shop By Category */}
-              <div className="border-r" style={{ borderColor: COLORS.gold }}>
-                <h4 
-                  className="text-xs uppercase tracking-widest mb-6 font-medium"
-                  style={{ color: COLORS.charcoal }}
+              {/* Dynamic Sections */}
+              {category.sections.map((section, index) => (
+                <div 
+                  key={section.title}
+                  className={`${index < category.sections.length - 1 || hasImage ? 'border-r pr-8' : ''}`}
+                  style={{ borderColor: COLORS.gold }}
                 >
-                  Shop By Category
-                </h4>
-                <ul className="space-y-3">
-                  {category.shopByCategory.map((item) => (
-                    <li key={item.label}>
-                      <Link
-                        href={item.href}
-                        className="text-sm transition-all duration-200 hover:translate-x-1 block"
-                        style={{ color: COLORS.charcoal }}
-                        onClick={onClose}
-                      >
-                        <span className="hover:pl-2 transition-all duration-200 inline-block">
-                          {item.label}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  <h4 
+                    className="text-xs uppercase tracking-widest mb-6 font-medium"
+                    style={{ color: COLORS.charcoal }}
+                  >
+                    {section.title}
+                  </h4>
+                  <ul className="space-y-3">
+                    {section.links.map((item) => (
+                      <li key={item.label}>
+                        <Link
+                          href={item.href}
+                          className="text-sm transition-all duration-200 hover:translate-x-1 block"
+                          style={{ color: COLORS.charcoal }}
+                          onClick={onClose}
+                        >
+                          <span className="hover:pl-2 transition-all duration-200 inline-block">
+                            {item.label}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
-              {/* Column 3: Curated Edits */}
-              <div className="border-r" style={{ borderColor: COLORS.gold }}>
-                <h4 
-                  className="text-xs uppercase tracking-widest mb-6 font-medium"
-                  style={{ color: COLORS.charcoal }}
-                >
-                  Curated Edits
-                </h4>
-                <ul className="space-y-3">
-                  {category.curatedEdits.map((item) => (
-                    <li key={item.label}>
-                      <Link
-                        href={item.href}
-                        className="text-sm transition-all duration-200 hover:translate-x-1 block"
-                        style={{ color: COLORS.charcoal }}
-                        onClick={onClose}
-                      >
-                        <span className="hover:pl-2 transition-all duration-200 inline-block">
-                          {item.label}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Column 4: Featured Image */}
-              {category.featuredImage && (
+              {/* Featured Image Column (if exists) */}
+              {hasImage && (
                 <div className="relative overflow-hidden rounded-lg">
                   <Image
-                    src={category.featuredImage}
+                    src={category.featuredImage!}
                     alt={category.label}
                     width={400}
                     height={600}
@@ -261,8 +347,17 @@ export function LuxuryMegaMenu({ className = '' }: LuxuryMegaMenuProps) {
   return (
     <div className={`relative ${className}`}>
       <div className="flex items-center justify-center gap-8">
+        {/* Home Link (no dropdown) */}
+        <Link
+          href="/"
+          className="text-xs font-normal tracking-widest uppercase text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
+        >
+          Home
+          <span className="absolute bottom-0 left-0 w-0 h-px bg-gray-900 group-hover:w-full transition-all duration-300" />
+        </Link>
+
         {menuCategories.map((category) => {
-          const hasDropdown = category.shopByCategory.length > 0;
+          const hasDropdown = category.sections && category.sections.length > 0;
           
           return (
             <div
@@ -289,15 +384,6 @@ export function LuxuryMegaMenu({ className = '' }: LuxuryMegaMenuProps) {
             </div>
           );
         })}
-
-        {/* Additional Links without dropdown */}
-        <Link
-          href="/b2b"
-          className="text-xs font-normal tracking-widest uppercase text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
-        >
-          B2B
-          <span className="absolute bottom-0 left-0 w-0 h-px bg-gray-900 group-hover:w-full transition-all duration-300" />
-        </Link>
       </div>
     </div>
   );
