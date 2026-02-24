@@ -17,8 +17,6 @@ const NAV_LINKS = [
   { label: 'Decor & Lighting', href: '/collections/decor-lighting' },
   { label: 'Gifting', href: '/collections/gifting' },
   { label: 'B2B', href: '/b2b' },
-  { label: 'About', href: '/about' },
-  { label: 'Visit Store', href: '/visit-store' },
 ];
 
 // Color Scheme
@@ -64,12 +62,12 @@ function Navigation() {
             </Link>
 
             {/* Desktop Menu - Centered */}
-            <div className="hidden md:flex items-center gap-10 lg:gap-16 absolute left-1/2 transform -translate-x-1/2">
+            <div className="hidden md:flex items-center gap-4 lg:gap-6 absolute left-1/2 transform -translate-x-1/2">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-xs sm:text-sm font-medium tracking-wide uppercase relative group"
+                  className="text-[10px] sm:text-xs lg:text-sm font-medium tracking-wide uppercase relative group whitespace-nowrap"
                   style={{ color: COLORS.deepTeal }}
                 >
                   {link.label}
