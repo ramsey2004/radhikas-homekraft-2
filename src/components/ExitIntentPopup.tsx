@@ -35,6 +35,18 @@ export function ExitIntentPopup({
     setHasMounted(true);
   }, []);
 
+  // Add escape key handler
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isVisible) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isVisible]);
+
   useEffect(() => {
     if (!hasMounted) return;
 
@@ -119,9 +131,11 @@ export function ExitIntentPopup({
                 {/* Close button */}
                 <button
                   onClick={handleClose}
-                  className="absolute top-4 right-4 p-1 hover:bg-white/50 rounded transition z-10"
+                  type="button"
+                  aria-label="Close popup"
+                  className="absolute top-4 right-4 p-2 hover:bg-white/80 rounded-full transition z-10 bg-white/60 shadow-sm"
                 >
-                  <X className="w-5 h-5 text-gray-600" />
+                  <X className="w-6 h-6 text-gray-700" />
                 </button>
 
                 {/* Heading */}

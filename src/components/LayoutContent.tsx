@@ -23,11 +23,13 @@ export function LayoutContent({ children }: LayoutContentProps) {
       <ComparisonCounter />
       <ShoppingCart />
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      {/* Temporarily disabled - can be re-enabled after testing 
       <ExitIntentPopup
         discount={15}
         headline="Don't Leave Empty-Handed!"
         subheadline="Get 15% off your first order"
       />
+      */}
       <main className="flex-grow">{children}</main>
       <Footer />
     </>
