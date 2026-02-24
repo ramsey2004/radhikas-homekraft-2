@@ -7,19 +7,7 @@ import { Menu, X, Search, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 import { useSearch } from '@/contexts/SearchContext';
-
-// Navigation Links - Luxury brand navigation
-const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Bed & Linen', href: '/collections/bedsheets' },
-  { label: 'Dining & Serving', href: '/collections/ceramics' },
-  { label: 'Drinkware', href: '/collections/ceramics' },
-  { label: 'Decor & Lighting', href: '/collections/lamps' },
-  { label: 'Gifting', href: '/collections/gifting' },
-  { label: 'B2B', href: '/b2b' },
-  { label: 'About', href: '/about' },
-  { label: 'Visit Store', href: '/visit-store' },
-];
+import { LuxuryMegaMenu } from '@/components/LuxuryMegaMenu';
 
 // Temporary color constants (being migrated to Tailwind classes)
 const COLORS = {
@@ -62,18 +50,9 @@ function Navigation() {
               </motion.span>
             </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
-              {NAV_LINKS.slice(0, 7).map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-xs font-normal tracking-widest uppercase text-gray-700 hover:text-gray-900 transition-colors duration-200 relative group"
-                >
-                  {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-gray-900 group-hover:w-full transition-all duration-300" />
-                </Link>
-              ))}
+            {/* Desktop Menu - Luxury Mega Menu */}
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
+              <LuxuryMegaMenu />
             </div>
 
             {/* Right Icons */}
@@ -122,16 +101,33 @@ function Navigation() {
         className="lg:hidden bg-white border-b border-gray-200 overflow-hidden"
       >
         <div className="px-6 py-6 space-y-4">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Home
+          </Link>
+          <Link href="/collections/bedsheets" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Bed & Linen
+          </Link>
+          <Link href="/collections/ceramics" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Dining & Serving
+          </Link>
+          <Link href="/collections/ceramics" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Drinkware
+          </Link>
+          <Link href="/collections/lamps" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Decor & Lighting
+          </Link>
+          <Link href="/collections/gifting" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Gifting
+          </Link>
+          <Link href="/b2b" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            B2B
+          </Link>
+          <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            About
+          </Link>
+          <Link href="/visit-store" onClick={() => setMobileMenuOpen(false)} className="block text-sm tracking-wider uppercase text-gray-700 hover:text-gray-900 transition-colors">
+            Visit Store
+          </Link>
         </div>
       </motion.div>
     </>
