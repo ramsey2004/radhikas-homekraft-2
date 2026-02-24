@@ -5,7 +5,7 @@ import { StickyCartButton } from '@/components/StickyCartButton';
 import { ComparisonCounter } from '@/components/ComparisonButton';
 import { ShoppingCart } from '@/components/ShoppingCart';
 import { SearchModal } from '@/components/SearchModal';
-import { ExitIntentPopup } from '@/components/ExitIntentPopup';
+// import { ExitIntentPopup } from '@/components/ExitIntentPopup';
 import { Footer } from '@/components/layout/Footer';
 import { useSearch } from '@/contexts/SearchContext';
 
