@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useReducer, ReactNode, useEffect, useState } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { 
   getOrCreateCheckout, 
   addLineItemsToCheckout,
@@ -9,7 +9,7 @@ import {
   redirectToCheckout,
   isShopifyConfigured,
   type ShopifyCheckout 
-} from '@/lib/shopify';
+} from '@/lib/shopify/index';
 
 export interface CartItem {
   id: number;
