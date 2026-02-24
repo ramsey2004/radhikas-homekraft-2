@@ -10,11 +10,15 @@ import { useSearch } from '@/contexts/SearchContext';
 
 // Navigation Links
 const NAV_LINKS = [
-  { label: 'PRĀKHARYA', href: '/collections/lamps' },
-  { label: 'SĪVANA', href: '/collections/bedsheets' },
-  { label: 'GRIHKALĀ', href: '/collections/furniture' },
-  { label: 'AMALA', href: '/collections/ceramics' },
-  { label: 'PUNĪTA', href: '/collections/gifting' },
+  { label: 'Home', href: '/' },
+  { label: 'Bed & Linen', href: '/collections/bed-linen' },
+  { label: 'Dining & Serving', href: '/collections/dining-serving' },
+  { label: 'Drinkware', href: '/collections/drinkware' },
+  { label: 'Decor & Lighting', href: '/collections/decor-lighting' },
+  { label: 'Gifting', href: '/collections/gifting' },
+  { label: 'B2B', href: '/b2b' },
+  { label: 'About', href: '/about' },
+  { label: 'Visit Store', href: '/visit-store' },
 ];
 
 // Color Scheme
