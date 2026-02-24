@@ -20,15 +20,13 @@ export function ImprovedNavigation() {
   const { state } = useCart();
   
   const mainCategories = [
+    NAVIGATION_CATEGORIES.HOME,
     NAVIGATION_CATEGORIES.BED_LINEN,
     NAVIGATION_CATEGORIES.DINING_SERVING,
     NAVIGATION_CATEGORIES.DRINKWARE,
     NAVIGATION_CATEGORIES.DECOR_LIGHTING,
     NAVIGATION_CATEGORIES.GIFTING,
     NAVIGATION_CATEGORIES.B2B,
-  ];
-
-  const secondaryLinks = [
     NAVIGATION_CATEGORIES.ABOUT,
     NAVIGATION_CATEGORIES.VISIT_STORE,
   ];
@@ -98,20 +96,6 @@ export function ImprovedNavigation() {
 
           {/* Right Icons */}
           <div className="flex items-center gap-4">
-            {/* Desktop Secondary Links */}
-            <div className="hidden lg:flex items-center gap-4">
-              {secondaryLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="px-3 py-2 rounded-lg hover:bg-white/20 transition-colors"
-                  style={{ color: COLORS.deepTeal }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
             {/* Icons */}
             <button className="p-2 rounded-lg hover:bg-white/20 transition-colors">
               <Search size={20} style={{ color: COLORS.deepTeal }} />
@@ -160,7 +144,7 @@ export function ImprovedNavigation() {
               exit={{ opacity: 0, height: 0 }}
               className="lg:hidden py-4 space-y-2"
             >
-              {[...mainCategories, ...secondaryLinks].map((category) => (
+              {mainCategories.map((category) => (
                 <div key={category.label}>
                   <Link
                     href={category.href}
