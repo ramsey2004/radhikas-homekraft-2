@@ -4,8 +4,6 @@ import { createContext, useContext, useReducer, ReactNode, useEffect } from 'rea
 import { 
   getOrCreateCheckout, 
   addLineItemsToCheckout,
-  removeLineItemFromCheckout,
-  updateLineItemQuantity,
   redirectToCheckout,
   isShopifyConfigured,
   type ShopifyCheckout 
