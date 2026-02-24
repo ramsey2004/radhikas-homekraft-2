@@ -1,15 +1,9 @@
 'use client';
 
-import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Users, Award, Heart, MapPin, Clock } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'About Us - Radhika\'s Homecraft',
-  description: 'Learn about Radhika\'s Homecraft and our mission to bring authentic Indian handicrafts to your home.',
-};
 
 const COLORS = {
   deepTeal: '#1A7A6E',
