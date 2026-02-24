@@ -1,13 +1,6 @@
 import type { Metadata } from 'next';
 import { Providers } from '@/components/providers';
-import { Footer } from '@/components/layout/Footer';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
-import { CustomCursor } from '@/components/CustomCursor';
-import { StickyCartButton } from '@/components/StickyCartButton';
-import { ExitIntentPopup } from '@/components/ExitIntentPopup';
-import { ComparisonCounter } from '@/components/ComparisonButton';
-import { ShoppingCart } from '@/components/ShoppingCart';
-import { SearchModal } from '@/components/SearchModal';
 import { LayoutContent } from '@/components/LayoutContent';
 import './globals.css';
 
