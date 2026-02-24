@@ -3,6 +3,8 @@ import {
   initializeRazorpayCheckout,
   verifyRazorpayPayment,
 } from '@/lib/payments';
+import { prisma } from '@/lib/prisma';
+import { sendEmail } from '@/lib/emailService';
 
 // Force dynamic rendering to skip payment initialization during build
 export const dynamic = 'force-dynamic';
@@ -25,9 +27,102 @@ export async function POST(request: NextRequest) {
     }
 
     if (pathname.endsWith('/verify')) {
-      const { orderId, paymentId, signature } = body;
-      const result = await verifyRazorpayPayment(orderId, paymentId, signature);
-      return NextResponse.json(result);
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = body;
+
+      // Verify signature
+      const verification = await verifyRazorpayPayment(
+        razorpay_payment_id,
+        razorpay_order_id,
+        razorpay_signature
+      );
+
+      if (!verification.success) {
+        return NextResponse.json(
+          { success: false, error: verification.error },
+          { status: 400 }
+        );
+      }
+
+      // Update order in database
+      const order = await prisma.order.findUnique({
+        where: { id: orderId },
+        include: {
+          items: {
+            include: {
+              product: true,
+            },
+          },
+          user: true,
+          shippingAddress: true,
+        },
+      });
+
+      if (!order) {
+        return NextResponse.json(
+          { success: false, error: 'Order not found' },
+          { status: 404 }
+        );
+      }
+
+      // Update order status
+      const updatedOrder = await prisma.order.update({
+        where: { id: orderId },
+        data: {
+          status: 'CONFIRMED',
+          paymentStatus: 'COMPLETED',
+        },
+      });
+
+      // Update payment log
+      await prisma.paymentLog.updateMany({
+        where: { orderId },
+        data: {
+          status: 'COMPLETED',
+          gatewayTransactionId: razorpay_payment_id,
+        },
+      });
+
+      // Send order confirmation email
+      try {
+        await sendEmail({
+          to: order.email,
+          template: 'orderConfirmation',
+          data: {
+            orderNumber: order.orderNumber,
+            total: order.total,
+            items: order.items,
+          },
+        });
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+        // Don't fail the verification if email fails
+      }
+
+      // Log analytics
+      try {
+        await prisma.analyticsEvent.create({
+          data: {
+            userId: order.userId,
+            eventType: 'PURCHASE',
+            eventName: 'Purchase Completed',
+            page: '/checkout',
+            metadata: JSON.stringify({
+              orderId: order.id,
+              total: order.total,
+              paymentMethod: 'RAZORPAY',
+              paymentId: razorpay_payment_id,
+            }),
+          },
+        });
+      } catch (analyticsError) {
+        console.error('Failed to log analytics:', analyticsError);
+      }
+
+      return NextResponse.json({
+        success: true,
+        order: updatedOrder,
+        message: 'Payment verified successfully',
+      });
     }
 
     return NextResponse.json({ error: 'Invalid endpoint' }, { status: 400 });
