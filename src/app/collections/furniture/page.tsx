@@ -86,7 +86,6 @@ export default function FurnitureCollection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group cursor-pointer"
-              onClick={() => setSelectedProduct(product.id)}
             >
               {/* Product Card */}
               <div className="mb-4 overflow-hidden rounded-lg">
