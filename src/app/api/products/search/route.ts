@@ -110,9 +110,9 @@ export async function GET(request: NextRequest) {
     ]);
 
     // Calculate average rating for each product
-    const productsWithRating = products.map((product) => {
+    const productsWithRating = products.map((product: any) => {
       const avgRating = product.reviews.length > 0
-        ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+        ? product.reviews.reduce((acc: number, r: any) => acc + r.rating, 0) / product.reviews.length
         : 0;
 
       return {
@@ -150,10 +150,10 @@ export async function GET(request: NextRequest) {
       distinct: ['material', 'color'],
     });
 
-    const materials = [...new Set(availableFilters.map((p) => p.material).filter(Boolean))];
-    const colors = [...new Set(availableFilters.map((p) => p.color).filter(Boolean))];
+    const materials = [...new Set(availableFilters.map((p: any) => p.material).filter(Boolean))];
+    const colors = [...new Set(availableFilters.map((p: any) => p.color).filter(Boolean))];
     const categories = [...new Map(
-      availableFilters.map((p) => [p.category.slug, p.category])
+      availableFilters.map((p: any) => [p.category.slug, p.category])
     ).values()];
 
     return NextResponse.json({

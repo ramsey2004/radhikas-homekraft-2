@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       paymentMethod: order.paymentMethod,
       subtotal: order.subtotal,
       total: order.total,
-      items: order.items.map((item) => ({
+      items: order.items.map((item: any) => ({
         name: item.product?.name || 'Product',
         sku: item.product?.sku || item.productId,
         units: item.quantity,

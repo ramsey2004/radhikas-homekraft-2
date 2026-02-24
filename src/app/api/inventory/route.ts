@@ -78,9 +78,9 @@ export async function GET(request: NextRequest) {
     });
 
     // Calculate metrics
-    const inventoryData = products.map((product) => {
-      const totalSold = product.orderItems.reduce((sum, item) => sum + item.quantity, 0);
-      const variantStock = product.variants.reduce((sum, v) => sum + v.quantity, 0);
+    const inventoryData = products.map((product: any) => {
+      const totalSold = product.orderItems.reduce((sum: number, item: any) => sum + item.quantity, 0);
+      const variantStock = product.variants.reduce((sum: number, v: any) => sum + v.quantity, 0);
       const totalStock = product.inventory + variantStock;
 
       return {
@@ -109,10 +109,10 @@ export async function GET(request: NextRequest) {
     // Calculate summary stats
     const summary = {
       totalProducts: inventoryData.length,
-      outOfStock: inventoryData.filter((p) => p.status === 'out_of_stock').length,
-      lowStock: inventoryData.filter((p) => p.status === 'low' || p.status === 'critical').length,
-      totalValue: inventoryData.reduce((sum, p) => sum + p.totalStock * p.price, 0),
-      totalUnits: inventoryData.reduce((sum, p) => sum + p.totalStock, 0),
+      outOfStock: inventoryData.filter((p: any) => p.status === 'out_of_stock').length,
+      lowStock: inventoryData.filter((p: any) => p.status === 'low' || p.status === 'critical').length,
+      totalValue: inventoryData.reduce((sum: number, p: any) => sum + p.totalStock * p.price, 0),
+      totalUnits: inventoryData.reduce((sum: number, p: any) => sum + p.totalStock, 0),
     };
 
     return NextResponse.json({

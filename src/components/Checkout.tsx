@@ -160,7 +160,7 @@ export function Checkout({ cartItems, onSuccess }: CheckoutProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="rounded-lg border border-gray-200 p-6"
-              style={{ borderColor: COLORS.deepTeal, borderOpacity: 0.3 }}
+              style={{ borderColor: COLORS.deepTeal }}
             >
               <div className="flex items-center justify-between mb-6 cursor-pointer" onClick={() => setStep(1)}>
                 <h2 className="text-xl font-medium flex items-center gap-2" style={{ color: COLORS.deepTeal }}>
@@ -234,7 +234,7 @@ export function Checkout({ cartItems, onSuccess }: CheckoutProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="rounded-lg border border-gray-200 p-6"
-              style={{ borderColor: COLORS.deepTeal, borderOpacity: 0.3 }}
+              style={{ borderColor: COLORS.deepTeal }}
             >
               <div className="flex items-center justify-between mb-6 cursor-pointer" onClick={() => setStep(2)}>
                 <h2 className="text-xl font-medium flex items-center gap-2" style={{ color: COLORS.deepTeal }}>
@@ -275,7 +275,7 @@ export function Checkout({ cartItems, onSuccess }: CheckoutProps) {
                   Order Summary
                 </h3>
 
-                <div className="space-y-3 mb-6 pb-6 border-b" style={{ borderColor: COLORS.deepTeal, borderOpacity: 0.2 }}>
+                <div className="space-y-3 mb-6 pb-6 border-b" style={{ borderColor: COLORS.deepTeal }}>
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex justify-between text-sm">
                       <span>
@@ -303,7 +303,7 @@ export function Checkout({ cartItems, onSuccess }: CheckoutProps) {
                   </div>
                 </div>
 
-                <div className="pb-6 border-b mb-6" style={{ borderColor: COLORS.deepTeal, borderOpacity: 0.2 }}>
+                <div className="pb-6 border-b mb-6" style={{ borderColor: COLORS.deepTeal }}>
                   <div className="flex justify-between font-bold text-lg" style={{ color: COLORS.deepTeal }}>
                     <span>Total</span>
                     <span>₹{total.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>

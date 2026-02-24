@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Package, Truck, Home, CheckCircle, Clock } from 'lucide-react';
+import { Package, Truck, Home, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 interface Order {
@@ -35,7 +35,7 @@ const statusSteps = [
   { status: 'DELIVERED', label: 'Delivered', icon: Home },
 ];
 
-export function OrderTrackingPage() {
+export default function OrderTrackingPage() {
   const params = useParams();
   const orderId = params.id as string;
   const [order, setOrder] = useState<Order | null>(null);

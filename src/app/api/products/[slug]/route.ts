@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
  * GET /api/products/[slug] - Fetch product by slug
  */
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
@@ -69,7 +69,7 @@ export async function GET(
     }
 
     // Format reviews
-    const formattedReviews = product.reviews.map((review) => ({
+    const formattedReviews = product.reviews.map((review: any) => ({
       id: review.id,
       rating: review.rating,
       comment: review.comment,
@@ -79,7 +79,7 @@ export async function GET(
 
     // Use productImages if available, fallback to images array
     const productImages = product.productImages.length > 0
-      ? product.productImages.map((img) => img.url)
+      ? product.productImages.map((img: any) => img.url)
       : product.images;
 
     return NextResponse.json({

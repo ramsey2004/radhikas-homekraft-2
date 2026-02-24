@@ -36,9 +36,9 @@ export async function POST(request: NextRequest) {
         razorpay_signature
       );
 
-      if (!verification.success) {
+      if (verification.status !== 'success') {
         return NextResponse.json(
-          { success: false, error: verification.error },
+          { success: false, error: 'Payment verification failed' },
           { status: 400 }
         );
       }

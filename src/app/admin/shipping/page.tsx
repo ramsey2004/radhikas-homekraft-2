@@ -24,13 +24,6 @@ interface Order {
   };
 }
 
-const COLORS = {
-  deepTeal: '#1A7A6E',
-  gold: '#C9A84C',
-  ivory: '#FAF3E0',
-  charcoal: '#2D2D2D',
-};
-
 export default function ShippingManagementPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
