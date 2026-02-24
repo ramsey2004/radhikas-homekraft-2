@@ -21,6 +21,16 @@ const NAV_LINKS = [
   { label: 'Visit Store', href: '/visit-store' },
 ];
 
+// Temporary color constants (being migrated to Tailwind classes)
+const COLORS = {
+  deepTeal: '#1A7A6E',
+  gold: '#C9A84C',
+  ivory: '#FAF3E0',
+  charcoal: '#2D2D2D',
+  lightBeige: '#E8D5C4',
+  darkTeal: '#2D5252',
+};
+
 /**
  * Minimal Luxury Navigation Bar
  */
