@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -46,8 +45,6 @@ const products = [
 ];
 
 export default function LampsCollection() {
-  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
-
   return (
     <div style={{ backgroundColor: COLORS.ivory, minHeight: '100vh' }}>
       {/* Header */}
