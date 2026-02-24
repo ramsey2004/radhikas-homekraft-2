@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 import { useSearch } from '@/contexts/SearchContext';
 
-// Navigation Links
+// Navigation Links - Updated categories for main navigation
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Bed & Linen', href: '/collections/bed-linen' },
