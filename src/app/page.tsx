@@ -13,9 +13,10 @@ const COLORS = {
   deepTeal: '#1A7A6E',
   gold: '#C9A84C',
   ivory: '#FAF9F6',
-  charcoal: '#2D2D2D',
+  charcoal: '#111111',
   lightBeige: '#E8D5C4',
   darkTeal: '#2D5252',
+  white: '#FFFFFF',
 };
 
 
@@ -220,7 +221,7 @@ function PhilosophySection() {
           {/* Philosophy Headline */}
           <h2 
             className="text-4xl sm:text-5xl md:text-6xl font-serif leading-tight mb-6"
-            style={{ color: COLORS.deepTeal }}
+            style={{ color: COLORS.charcoal }}
           >
             Rooted in Craft.
             <br />
@@ -243,7 +244,7 @@ function PhilosophySection() {
               whileHover={{ x: 5 }}
               transition={{ duration: 0.3 }}
               className="inline-block text-sm sm:text-base tracking-widest font-medium transition-colors"
-              style={{ color: COLORS.deepTeal }}
+              style={{ color: COLORS.charcoal }}
             >
               Our Story →
             </motion.span>
@@ -383,7 +384,7 @@ function SignaturePiecesSection() {
   ];
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: 'white' }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Title */}
         <motion.div
@@ -391,21 +392,21 @@ function SignaturePiecesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-12 sm:mb-16 md:mb-20"
+          className="mb-16 sm:mb-20 md:mb-28"
         >
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl font-serif"
-            style={{ color: COLORS.deepTeal }}
+            style={{ color: COLORS.charcoal }}
           >
             Signature Pieces
           </h2>
           <p className="text-sm mt-2" style={{ color: COLORS.charcoal }}>
-            Curated favorites from our collections
+            Curated selections from our collections
           </p>
         </motion.div>
 
-        {/* 6-Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        {/* 6-Product Grid - Larger Images */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 md:gap-14">
           {signature_products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -434,7 +435,7 @@ function SignaturePiecesSection() {
                   whileHover={{ x: 2 }}
                   transition={{ duration: 0.3 }}
                   className="text-sm tracking-wide font-medium transition-colors"
-                  style={{ color: COLORS.deepTeal }}
+                  style={{ color: COLORS.charcoal }}
                 >
                   {product.name}
                 </motion.h3>
@@ -460,7 +461,7 @@ function SignaturePiecesSection() {
  */
 function CraftStorySection() {
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: 'white' }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Left: Fabric/Craft Image */}
@@ -489,7 +490,7 @@ function CraftStorySection() {
           >
             <h2 
               className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4 sm:mb-6"
-              style={{ color: COLORS.deepTeal }}
+              style={{ color: COLORS.charcoal }}
             >
               Crafted in Rajasthan
             </h2>
@@ -614,7 +615,7 @@ function TrustStripSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-sm sm:text-base font-medium tracking-wide" style={{ color: COLORS.deepTeal }}>
+              <h3 className="text-sm sm:text-base font-medium tracking-wide" style={{ color: COLORS.charcoal }}>
                 {benefit.title}
               </h3>
             </motion.div>
@@ -774,7 +775,7 @@ function Footer() {
  */
 export default function HomePage() {
   return (
-    <div className="w-full overflow-hidden" style={{ backgroundColor: COLORS.ivory }}>
+    <div className="w-full overflow-hidden" style={{ backgroundColor: 'white' }}>
       {/* 1️⃣ Navigation */}
       <Navigation />
 
