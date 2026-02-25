@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -236,15 +236,15 @@ function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.18 }}
-          className="absolute left-0 right-0 top-full w-full shadow-2xl z-50"
+          exit={{ opacity: 0, y: -5 }}
+          transition={{ duration: 0.15 }}
+          className="fixed left-0 right-0 top-[80px] w-full shadow-2xl z-40 overflow-hidden"
           style={{ backgroundColor: COLORS.ivory }}
           onMouseLeave={onClose}
         >
-          <div className="mx-auto max-w-7xl px-8 py-16">
+          <div className="mx-auto max-w-7xl px-8 py-12">
             <div className={`grid ${gridCols} gap-12`}>
               {/* Column 1: Brand Mood Block */}
               <div className="border-r pr-8" style={{ borderColor: COLORS.gold }}>
@@ -330,6 +330,12 @@ export function LuxuryMegaMenu({ className = '' }: LuxuryMegaMenuProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) clearTimeout(hoverTimeout);
+    };
+  }, [hoverTimeout]);
+
   const handleMouseEnter = (label: string) => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(label);
@@ -338,11 +344,9 @@ export function LuxuryMegaMenu({ className = '' }: LuxuryMegaMenuProps) {
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => {
       setActiveMenu(null);
-    }, 150);
+    }, 100);
     setHoverTimeout(timeout);
   };
-
-  const menuCategories = Object.values(MEGA_MENU_DATA);
 
   return (
     <div className={`relative ${className}`}>
@@ -356,7 +360,7 @@ export function LuxuryMegaMenu({ className = '' }: LuxuryMegaMenuProps) {
           <span className="absolute bottom-0 left-0 w-0 h-px bg-gray-900 group-hover:w-full transition-all duration-300" />
         </Link>
 
-        {menuCategories.map((category) => {
+        {Object.values(MEGA_MENU_DATA).map((category) => {
           const hasDropdown = category.sections && category.sections.length > 0;
           
           return (
