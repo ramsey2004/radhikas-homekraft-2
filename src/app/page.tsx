@@ -139,45 +139,52 @@ function Navigation() {
  */
 function HeroSection() {
   return (
-    <section className="relative w-full h-screen sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden" style={{ backgroundColor: COLORS.deepTeal }}>
-      {/* Hero Image */}
-      <div className="relative w-full h-full">
-        <Image
-          src="https://images.unsplash.com/photo-1517457373614-b7152f800fd1?w=1600&h=1200&fit=crop"
-          alt="Woman in floral dress on tropical beach"
-          fill
-          className="object-cover"
-          priority
-          quality={85}
-        />
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Full-width lifestyle bedroom image */}
+      <Image
+        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1920&h=1200&fit=crop"
+        alt="Luxury bedroom - Krafted for Elegance"
+        fill
+        className="object-cover"
+        priority
+        quality={90}
+      />
 
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: `rgba(26, 122, 110, 0.3)` }} />
-      </div>
+      {/* Subtle overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/10 to-transparent" />
 
       {/* Content Overlay */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+        transition={{ duration: 1, delay: 0.3 }}
+        className="absolute inset-0 flex flex-col items-start justify-center px-6 sm:px-12 md:px-16 lg:px-20 max-w-4xl"
       >
-        {/* Product Name */}
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-wider uppercase" style={{ color: COLORS.ivory }}>
-            SATVAM
-          </h1>
-          <p className="text-base sm:text-lg tracking-widest mt-4" style={{ color: COLORS.ivory }}>COLLECTION</p>
-        </div>
+        {/* Main Headline */}
+        <h1 
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif leading-tight mb-6"
+          style={{ color: COLORS.ivory }}
+        >
+          Krafted for Elegance
+        </h1>
 
-        {/* Call to Action Button */}
+        {/* Subheadline */}
+        <p 
+          className="text-lg sm:text-xl md:text-2xl font-light tracking-wide mb-8 max-w-2xl"
+          style={{ color: COLORS.gold }}
+        >
+          Heritage craftsmanship designed for modern homes.
+        </p>
+
+        {/* CTA Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-8 px-8 sm:px-10 py-3 sm:py-4 border-2 text-sm sm:text-base tracking-wider font-medium transition-all duration-300"
-          style={{ borderColor: COLORS.gold, color: COLORS.deepTeal, backgroundColor: COLORS.gold }}
+          className="mt-4 px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base tracking-wider font-medium transition-all duration-300"
+          style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
+          onClick={() => window.location.href = '/collections/bedsheets'}
         >
-          SHOP WOMEN
+          EXPLORE COLLECTION
         </motion.button>
       </motion.div>
     </section>
@@ -382,6 +389,9 @@ function FeaturedSection() {
 /**
  * Newsletter Section
  */
+/**
+ * Newsletter Section - Subtle & Refined
+ */
 function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -394,8 +404,8 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: COLORS.ivory }}>
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-12 sm:py-16 md:py-20" style={{ backgroundColor: COLORS.ivory }}>
+      <div className="mx-auto max-w-2xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -403,42 +413,44 @@ function NewsletterSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wider mb-4" style={{ color: COLORS.deepTeal }}>
-            STAY CONNECTED
+          <h2 className="text-2xl sm:text-3xl font-serif mb-3" style={{ color: COLORS.deepTeal }}>
+            Receive Curated Updates
           </h2>
-          <p className="text-sm sm:text-base mb-8" style={{ color: COLORS.charcoal }}>
-            Receive updates on new collections, artisan stories, and exclusive offers.
+          <p className="text-sm mb-8" style={{ color: COLORS.charcoal }}>
+            Stories from our artisans, new collections, and occasions worth celebrating.
           </p>
 
-          {/* Newsletter Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-0">
+          {/* Minimal Email Form */}
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0 items-center justify-center">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="your@email.com"
               required
-              className="flex-1 px-4 py-3 text-sm border focus:outline-none transition-colors"
-              style={{ borderColor: COLORS.gold, backgroundColor: '#FFFFFF', color: COLORS.charcoal }}
+              className="flex-1 max-w-sm px-4 py-3 text-sm border-b-2 focus:outline-none transition-colors bg-transparent"
+              style={{ borderColor: subscribed ? COLORS.gold : COLORS.charcoal, color: COLORS.charcoal }}
             />
-            <motion.button
-              whileTap={{ scale: 0.98 }}
+            <button
               type="submit"
-              className="px-6 py-3 text-sm font-medium tracking-wider transition-colors"
-              style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
+              className="mt-4 sm:mt-0 sm:ml-4 px-6 py-3 text-xs tracking-widest font-medium transition-all duration-300"
+              style={{ 
+                backgroundColor: subscribed ? COLORS.gold : COLORS.deepTeal, 
+                color: COLORS.ivory,
+              }}
             >
-              SUBSCRIBE
-            </motion.button>
+              {subscribed ? '✓ SUBSCRIBED' : 'SUBSCRIBE'}
+            </button>
           </form>
 
           {subscribed && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-sm mt-3"
+              className="text-xs mt-4"
               style={{ color: COLORS.deepTeal }}
             >
-              ✓ Thank you for subscribing!
+              Thank you. We'll be in touch.
             </motion.p>
           )}
         </motion.div>

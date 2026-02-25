@@ -240,12 +240,12 @@ function MegaMenuItem({ category, isOpen, onClose }: MegaMenuItemProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -5 }}
           transition={{ duration: 0.15 }}
-          className="fixed left-0 right-0 top-[80px] w-full shadow-2xl z-40 overflow-hidden"
+          className="fixed left-0 right-0 top-[80px] w-full shadow-lg z-40 overflow-hidden"
           style={{ backgroundColor: COLORS.ivory }}
           onMouseLeave={onClose}
         >
-          <div className="mx-auto max-w-7xl px-8 py-12">
-            <div className={`grid ${gridCols} gap-12`}>
+          <div className="mx-auto max-w-7xl px-8 py-20">
+            <div className={`grid ${gridCols} gap-16`}>
               {/* Column 1: Brand Mood Block */}
               <div className="border-r pr-8" style={{ borderColor: COLORS.gold }}>
                 <h3 
