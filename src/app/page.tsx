@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Search, ShoppingBag, Heart, Truck, Lock, CreditCard } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 import { useSearch } from '@/contexts/SearchContext';
@@ -158,7 +158,7 @@ function HeroSection() {
       />
 
       {/* Subtle overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-transparent" />
 
       {/* Content Overlay */}
       <motion.div
@@ -208,7 +208,7 @@ function HeroSection() {
  */
 function PhilosophySection() {
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: 'white' }}>
+    <section className="w-full py-28 sm:py-36 md:py-44" style={{ backgroundColor: 'white' }}>
       <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -266,17 +266,17 @@ function CuratedCollectionsSection() {
   return (
     <>
       {/* Collection 1: The Signature Bedroom */}
-      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden">
+      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden group">
         <Image
           src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1200&fit=crop"
           alt="Luxury bedroom with signature linens"
           fill
-          className="object-cover"
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
           quality={85}
         />
         
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-black/10" />
         
         {/* Content */}
         <motion.div
@@ -286,33 +286,27 @@ function CuratedCollectionsSection() {
           viewport={{ once: true }}
           className="absolute inset-0 flex flex-col justify-center items-start px-6 sm:px-12 md:px-16 lg:px-20"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif mb-3" style={{ color: COLORS.ivory }}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif" style={{ color: COLORS.ivory }}>
             The Signature Bedroom
           </h2>
-          <p className="text-lg sm:text-xl mb-6" style={{ color: COLORS.gold }}>
-            Layered. Refined. Intentional.
-          </p>
-          <Link href="/collections/bedsheets" className="mt-4 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium hover:opacity-90" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}>
-            Explore Bed & Linen
+          <Link href="/collections/bedsheets" className="mt-6 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium hover:opacity-80" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}>
+            Explore Bed & Linen →
           </Link>
         </motion.div>
       </section>
 
-      {/* Breathing Space */}
-      <section className="w-full py-8 sm:py-12 md:py-16" style={{ backgroundColor: COLORS.ivory }} />
-
       {/* Collection 2: The Art of Hosting */}
-      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden">
+      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden group">
         <Image
           src="https://images.unsplash.com/photo-1551632786-de41ec802fcb?w=1600&h=1200&fit=crop"
           alt="Elegant dining table setting"
           fill
-          className="object-cover"
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
           quality={85}
         />
         
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/20 to-transparent" />
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-black/10" />
         
         {/* Content */}
         <motion.div
@@ -322,14 +316,11 @@ function CuratedCollectionsSection() {
           viewport={{ once: true }}
           className="absolute inset-0 flex flex-col justify-center items-end px-6 sm:px-12 md:px-16 lg:px-20 text-right"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif mb-3" style={{ color: COLORS.ivory }}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif" style={{ color: COLORS.ivory }}>
             The Art of Hosting
           </h2>
-          <p className="text-lg sm:text-xl mb-6" style={{ color: COLORS.gold }}>
-            Gatherings that linger, tables that tell stories.
-          </p>
-          <Link href="/collections/ceramics" className="mt-4 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium hover:opacity-90" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}>
-            Discover Dining & Serving
+          <Link href="/collections/ceramics" className="mt-6 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium hover:opacity-80" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}>
+            Explore Dining & Serving →
           </Link>
         </motion.div>
       </section>
@@ -469,7 +460,7 @@ function SignaturePiecesSection() {
  */
 function CraftStorySection() {
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: 'white' }}>
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Left: Fabric/Craft Image */}
@@ -504,25 +495,13 @@ function CraftStorySection() {
             </h2>
 
             <p 
-              className="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6"
-              style={{ color: COLORS.charcoal }}
-            >
-              In the heart of Rajasthan, master artisans have perfected their craft over generations. 
-              Each piece we create begins here, where tradition meets intention. Our weavers, potters, 
-              and artisans work with natural materials, honoring time-tested techniques passed down 
-              through families.
-            </p>
-
-            <p 
               className="text-base sm:text-lg leading-relaxed mb-8"
               style={{ color: COLORS.charcoal }}
             >
-              We believe in fair wages, ethical practices, and direct relationships with our 
-              makers. When you bring one of our pieces into your home, you're supporting a 
-              community of skilled hands dedicated to creating beauty that lasts.
+              Master artisans in Rajasthan source the finest natural materials—Egyptian cotton, organic linens, reclaimed wood, and mineral ceramics. Each material undergoes rigorous quality checks. Our finishing process emphasizes durability and timeless beauty: hand-stitched hems, natural dyes, hand-painted ceramics, and protective mineral treatments ensure every piece withstands decades of use.
             </p>
 
-            {/* Artisan Story CTA */}
+            {/* Craft Story CTA */}
             <Link href="/craft-artisans">
               <motion.span
                 whileHover={{ x: 5 }}
@@ -530,7 +509,7 @@ function CraftStorySection() {
                 className="inline-block text-sm tracking-widest font-medium transition-colors"
                 style={{ color: COLORS.deepTeal }}
               >
-                Meet Our Artisans →
+                Discover Our Craft →
               </motion.span>
             </Link>
           </motion.div>
@@ -572,7 +551,7 @@ function VisitStoreSection() {
         className="absolute inset-0 flex flex-col items-center justify-end px-6 sm:px-12 pb-12 sm:pb-16 md:pb-20"
       >
         <h2 
-          className="text-4xl sm:text-5xl md:text-6xl font-serif mb-3 text-center max-w-2xl"
+          className="text-4xl sm:text-5xl md:text-6xl font-serif mb-4 text-center max-w-2xl"
           style={{ color: COLORS.ivory }}
         >
           Visit Our Jaipur Flagship
@@ -582,7 +561,7 @@ function VisitStoreSection() {
           className="text-lg mb-8 text-center"
           style={{ color: COLORS.gold }}
         >
-          Experience luxury in person. Walk through curated collections and meet our artisans.
+          Experience our collections in person.
         </p>
 
         {/* Get Directions CTA */}
@@ -593,7 +572,7 @@ function VisitStoreSection() {
           style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
           onClick={() => window.location.href = '/visit-store'}
         >
-          GET DIRECTIONS
+          Get Directions →
         </motion.button>
       </motion.div>
     </section>
@@ -610,62 +589,36 @@ function VisitStoreSection() {
 function TrustStripSection() {
   const benefits = [
     {
-      icon: Heart,
       title: 'Artisan Crafted',
-      description: 'Handmade by skilled makers from Rajasthan',
     },
     {
-      icon: Truck,
       title: 'Ethically Sourced',
-      description: 'Fair wages and transparent supply chains',
     },
     {
-      icon: Lock,
       title: 'Secure Payments',
-      description: 'SSL-encrypted transactions for your peace of mind',
     },
     {
-      icon: CreditCard,
       title: 'Cash on Delivery',
-      description: 'Pay upon delivery across India',
     },
   ];
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
+    <section className="w-full py-12 sm:py-16 md:py-20" style={{ backgroundColor: 'white' }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
-          {benefits.map((benefit, index) => {
-            const IconComponent = benefit.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                {/* Icon */}
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="flex items-center justify-center mb-4"
-                >
-                  <IconComponent className="w-8 h-8 sm:w-10 sm:h-10" style={{ color: COLORS.deepTeal }} />
-                </motion.div>
-
-                {/* Title */}
-                <h3 className="text-sm sm:text-base font-medium tracking-widest mb-2" style={{ color: COLORS.deepTeal }}>
-                  {benefit.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: COLORS.charcoal }}>
-                  {benefit.description}
-                </p>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-sm sm:text-base font-medium tracking-wide" style={{ color: COLORS.deepTeal }}>
+                {benefit.title}
+              </h3>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
