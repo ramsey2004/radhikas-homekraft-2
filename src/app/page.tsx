@@ -185,6 +185,84 @@ function HeroSection() {
 }
 
 /**
+ * Editorial Block Component
+ */
+function EditorialBlock() {
+  return (
+    <>
+      {/* Editorial Block 1: The Signature Bedroom */}
+      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1200&fit=crop"
+          alt="Luxury bedroom with layered linens"
+          fill
+          className="object-cover"
+          quality={85}
+        />
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+        
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="absolute inset-0 flex flex-col justify-center items-start px-6 sm:px-12 md:px-16 lg:px-20"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif mb-3" style={{ color: COLORS.ivory }}>
+            The Signature Bedroom
+          </h2>
+          <p className="text-lg sm:text-xl mb-6" style={{ color: COLORS.gold }}>
+            Layered. Refined. Intentional.
+          </p>
+          <Link href="/collections/bedsheets" className="mt-4 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+            Explore Bed & Linen
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* Breathing Space */}
+      <section className="w-full py-12 sm:py-16 md:py-20" style={{ backgroundColor: COLORS.ivory }} />
+
+      {/* Editorial Block 2: The Art of Hosting */}
+      <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1551632786-de41ec802fcb?w=1600&h=1200&fit=crop"
+          alt="Elegant dining table setting"
+          fill
+          className="object-cover"
+          quality={85}
+        />
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/20 to-transparent" />
+        
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="absolute inset-0 flex flex-col justify-center items-end px-6 sm:px-12 md:px-16 lg:px-20 text-right"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif mb-3" style={{ color: COLORS.ivory }}>
+            The Art of Hosting
+          </h2>
+          <p className="text-lg sm:text-xl mb-6" style={{ color: COLORS.gold }}>
+            Gatherings that linger, tables that tell stories.
+          </p>
+          <Link href="/collections/ceramics" className="mt-4 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+            Discover Dining & Serving
+          </Link>
+        </motion.div>
+      </section>
+    </>
+  );
+}
+
+/**
  * Image Gallery Section
  */
 function GallerySection() {
@@ -258,24 +336,24 @@ function FeaturedSection() {
   const features = [
     {
       title: 'ARTISAN CRAFTED',
-      description: 'Each piece is handmade by skilled artisans using traditional techniques',
+      description: 'Each piece is handmade by skilled artisans using traditional techniques passed through generations.',
     },
     {
-      title: 'SUSTAINABLE MATERIALS',
-      description: 'Ethically sourced natural materials from trusted artisan communities',
+      title: 'ETHICAL SOURCING',
+      description: 'Direct relationships with makers, fair wages, and transparent supply chains.',
     },
     {
       title: 'TIMELESS DESIGN',
-      description: 'Minimalist aesthetic that complements any modern home decor',
+      description: 'Minimal aesthetic that transcends trends, designed to age beautifully.',
     },
     {
-      title: 'GLOBAL SHIPPED',
-      description: 'Free shipping on orders over ₹5,000 to anywhere in India',
+      title: 'SUSTAINABLY MADE',
+      description: 'Natural materials, eco-conscious processes, and packaging that respects the planet.',
     },
   ];
 
   return (
-    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24 border-t" style={{ backgroundColor: COLORS.ivory, borderTopColor: COLORS.gold }}>
+    <section className="w-full py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: 'white' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {features.map((feature, index) => (
@@ -384,6 +462,9 @@ export default function HomePage() {
       {/* Gallery Section */}
       <GallerySection />
 
+      {/* Editorial Blocks */}
+      <EditorialBlock />
+
       {/* Features Section */}
       <FeaturedSection />
 
@@ -393,32 +474,28 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="text-white py-12 sm:py-16 md:py-20" style={{ backgroundColor: COLORS.deepTeal }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Top Section - 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 mb-12">
             {/* Brand */}
             <div>
-              <h3 className="text-lg font-medium tracking-wider mb-4">RADHIKA'S HOMEKRAFT</h3>
+              <h3 className="text-lg font-serif mb-4" style={{ color: COLORS.gold }}>Radhika's Homekraft</h3>
               <p className="text-sm" style={{ color: COLORS.lightBeige }}>
-                Artisan-crafted home decor celebrating India's rich cultural heritage.
+                Krafted for Elegance
               </p>
             </div>
 
             {/* Shop */}
             <div>
-              <h4 className="text-sm font-medium tracking-widest mb-4">SHOP</h4>
-              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
+              <h4 className="text-xs font-medium tracking-widest mb-6" style={{ color: COLORS.gold }}>SHOP</h4>
+              <ul className="space-y-3 text-sm" style={{ color: COLORS.lightBeige }}>
                 <li>
-                  <Link href="/collections" className="hover:text-white transition-colors">
-                    Collections
+                  <Link href="/collections/bedsheets" className="hover:text-white transition-colors">
+                    Bed & Linen
                   </Link>
                 </li>
                 <li>
                   <Link href="/collections/ceramics" className="hover:text-white transition-colors">
-                    Ceramics
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/collections/textiles" className="hover:text-white transition-colors">
-                    Textiles
+                    Dining & Serving
                   </Link>
                 </li>
                 <li>
@@ -426,73 +503,45 @@ export default function HomePage() {
                     Gifting
                   </Link>
                 </li>
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div>
-              <h4 className="text-sm font-medium tracking-widest mb-4">SUPPORT</h4>
-              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
                 <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/faq" className="hover:text-white transition-colors">
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/shipping" className="hover:text-white transition-colors">
-                    Shipping Info
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/returns" className="hover:text-white transition-colors">
-                    Returns
+                  <Link href="/craft-artisans" className="hover:text-white transition-colors">
+                    Craft & Artisans
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Connect */}
             <div>
-              <h4 className="text-sm font-medium tracking-widest mb-4">LEGAL</h4>
-              <ul className="space-y-2 text-sm" style={{ color: COLORS.lightBeige }}>
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
-                    Privacy Policy
+              <h4 className="text-xs font-medium tracking-widest mb-6" style={{ color: COLORS.gold }}>CONNECT</h4>
+              <div className="space-y-3" style={{ color: COLORS.lightBeige }}>
+                <p className="text-sm">
+                  <a href="tel:+918239316066" className="hover:text-white transition-colors">
+                    +91-8239316066
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a href="mailto:radhikashomekraft.in" className="hover:text-white transition-colors">
+                    radhikashomekraft.in
+                  </a>
+                </p>
+                <div className="flex gap-4 mt-4">
+                  <Link href="#" style={{ color: COLORS.gold }} className="hover:text-white transition-colors text-sm">
+                    Instagram
                   </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
-                    Terms of Service
+                  <Link href="#" style={{ color: COLORS.gold }} className="hover:text-white transition-colors text-sm">
+                    Pinterest
                   </Link>
-                </li>
-                <li>
-                  <Link href="/cookies" className="hover:text-white transition-colors">
-                    Cookie Policy
-                  </Link>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Bottom Footer */}
-          <div className="border-t pt-8 flex flex-col sm:flex-row items-center justify-between text-sm" style={{ borderColor: COLORS.darkTeal, color: COLORS.lightBeige }}>
-            <p>&copy; 2026 Radhika's Homekraft. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 sm:mt-0">
-              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
-                Instagram
-              </Link>
-              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
-                Pinterest
-              </Link>
-              <Link href="#" className="transition-colors" style={{ color: COLORS.lightBeige }}>
-                YouTube
-              </Link>
-            </div>
+          {/* Bottom Divider */}
+          <div className="border-t pt-8" style={{ borderColor: COLORS.gold }}>
+            <p className="text-center text-xs" style={{ color: COLORS.lightBeige }}>
+              &copy; 2026 Radhika's Homekraft. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
