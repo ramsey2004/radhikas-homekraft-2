@@ -381,6 +381,13 @@ function SignaturePiecesSection() {
       image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=400&h=400&fit=crop',
       link: '/collections/ceramics',
     },
+    {
+      id: 7,
+      name: 'Single Saucer and Teacup Set',
+      price: '₹1,400',
+      image: 'https://res.cloudinary.com/dk1ovmxuj/image/upload/c_fill,w_400,h_400,q_auto,f_auto/v1772086521/DSCF0712_ojoyil.jpg',
+      link: '/collections/ceramics',
+    },
   ];
 
   return (
