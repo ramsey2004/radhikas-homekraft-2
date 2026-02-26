@@ -150,7 +150,7 @@ function HeroSection() {
     <section className="relative w-full h-screen overflow-hidden">
       {/* Full-width lifestyle bedroom image */}
       <Image
-        src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1920&h=1200&fit=crop"
+        src="https://res.cloudinary.com/dk1ovmxuj/image/upload/c_fill,w_1920,h_1200,q_auto,f_auto/v1772086712/DSCF0770_ozkc37.jpg"
         alt="Luxury bedroom - Krafted for Elegance"
         fill
         className="object-cover"
