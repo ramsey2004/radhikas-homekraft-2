@@ -348,9 +348,9 @@ function SignaturePiecesSection() {
     },
     {
       id: 2,
-      name: 'Ceramic Dinner Plate - Sage',
-      price: '₹1,200',
-      image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&h=400&fit=crop',
+      name: 'Printed Dinner Plate',
+      price: '₹1,500',
+      image: 'https://res.cloudinary.com/dk1ovmxuj/image/upload/c_fill,w_400,h_400,q_auto,f_auto/v1772086391/DSCF0673_dqm9rk.jpg',
       link: '/collections/ceramics',
     },
     {
