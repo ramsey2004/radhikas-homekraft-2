@@ -21,6 +21,49 @@ const COLORS = {
 
 
 // ========================================
+// 0️⃣ SECTION 0 - ANNOUNCEMENT BAR & WHATSAPP
+// ========================================
+/**
+ * Free Shipping Announcement Bar + WhatsApp Chat
+ */
+function AnnouncementBar() {
+  return (
+    <>
+      {/* Free Shipping Announcement Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full py-3 px-6 text-center text-sm font-medium tracking-wide"
+        style={{ backgroundColor: COLORS.deepTeal, color: COLORS.ivory }}
+      >
+        🎁 FREE SHIPPING ON ORDERS ABOVE ₹1,499 | COD AVAILABLE PAN-INDIA
+      </motion.div>
+
+      {/* WhatsApp Chat Widget */}
+      <motion.a
+        href="https://wa.me/919876543210?text=Hi%20Radhika's%20Homekraft!%20I'd%20like%20to%20know%20more%20about%20your%20products."
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all duration-300"
+        title="Chat with us on WhatsApp"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.781 1.149c-1.488.557-2.64 1.405-3.596 2.361-1.962 1.962-2.922 4.66-2.922 7.475v.006c0 3.356 1.003 6.46 2.902 8.6l-.963 2.88c-.16.48.212.945.712.945.052 0 .106-.008.16-.025l3.359-1.004c1.404.577 3.002.903 4.748.903 3.637 0 6.823-1.413 8.785-3.375 1.962-1.962 2.922-4.66 2.922-7.475v-.006c0-3.356-1.003-6.46-2.902-8.6.16-.48-.212-.945-.712-.945-.052 0-.106.008-.16.025z" />
+        </svg>
+      </motion.a>
+    </>
+  );
+}
+
+// ========================================
 // 1️⃣ SECTION 1 - NAVIGATION
 // ========================================
 /**
@@ -151,7 +194,7 @@ function HeroSection() {
       {/* Full-width lifestyle bedroom image */}
       <Image
         src="https://res.cloudinary.com/dk1ovmxuj/image/upload/c_fill,w_1920,h_1200,q_auto,f_auto/v1772086712/DSCF0770_ozkc37.jpg"
-        alt="Luxury bedroom - Krafted for Elegance"
+        alt="Luxury bedroom - Timeless Indian Craftsmanship for Modern Homes"
         fill
         className="object-cover"
         priority
@@ -173,7 +216,7 @@ function HeroSection() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif leading-tight mb-6"
           style={{ color: COLORS.ivory }}
         >
-          Krafted for Elegance
+          Timeless Indian Craftsmanship for Modern Homes
         </h1>
 
         {/* Subheadline */}
@@ -181,26 +224,341 @@ function HeroSection() {
           className="text-lg sm:text-xl md:text-2xl font-light tracking-wide mb-8 max-w-2xl"
           style={{ color: COLORS.gold }}
         >
-          Heritage craftsmanship designed for modern homes.
+          Discover elegant home décor and gifting pieces inspired by heritage, designed for refined living.
         </p>
 
-        {/* CTA Button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-4 px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base tracking-wider font-medium transition-all duration-300"
-          style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
-          onClick={() => window.location.href = '/collections/bedsheets'}
-        >
-          EXPLORE COLLECTION
-        </motion.button>
+        {/* Dual CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base tracking-wider font-medium transition-all duration-300"
+            style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}
+            onClick={() => window.location.href = '/shop'}
+          >
+            Shop Bestsellers
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base tracking-wider font-medium transition-all duration-300 border-2"
+            style={{ borderColor: COLORS.gold, color: COLORS.ivory, backgroundColor: 'transparent' }}
+            onClick={() => window.location.href = '/collections/gifting'}
+          >
+            Explore Gifting
+          </motion.button>
+        </div>
       </motion.div>
     </section>
   );
 }
 
 // ========================================
-// 3️⃣ SECTION 3 - PHILOSOPHY BLOCK
+// 3️⃣ SECTION 3 - BESTSELLERS (ABOVE FOLD)
+// ========================================
+/**
+ * Bestsellers Section
+ * 4 featured products with bestseller badges and ratings
+ * Positioned immediately after hero for maximum visibility
+ */
+function BestsellersSection() {
+  const bestsellers = [
+    {
+      id: 1,
+      name: 'Handcrafted Brass Lotus Tealight Holder',
+      price: 1299,
+      originalPrice: 1799,
+      rating: 4.8,
+      reviews: 142,
+      publicId: 'v1772086712/DSCF0770_ozkc37',
+      badge: 'Bestseller',
+    },
+    {
+      id: 2,
+      name: 'Organic Cotton Bedsheet Set',
+      price: 2499,
+      originalPrice: 3499,
+      rating: 4.7,
+      reviews: 98,
+      publicId: 'v1772086712/DSCF0770_ozkc37',
+      badge: 'Bestseller',
+    },
+    {
+      id: 3,
+      name: 'Indigo Hand-Block Printed Cushion',
+      price: 899,
+      originalPrice: 1299,
+      rating: 4.6,
+      reviews: 76,
+      publicId: 'v1772086712/DSCF0770_ozkc37',
+      badge: 'Bestseller',
+    },
+    {
+      id: 4,
+      name: 'Ceramic Serving Platter Set',
+      price: 1599,
+      originalPrice: 2199,
+      rating: 4.9,
+      reviews: 125,
+      publicId: 'v1772086712/DSCF0770_ozkc37',
+      badge: 'Bestseller',
+    },
+  ];
+
+  return (
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16 sm:mb-20 md:mb-28 text-center"
+        >
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4"
+            style={{ color: COLORS.charcoal }}
+          >
+            Customer Favorites
+          </h2>
+          <p className="text-sm md:text-base" style={{ color: COLORS.charcoal }}>
+            Join 500+ happy homes with our bestselling pieces
+          </p>
+        </motion.div>
+
+        {/* 4-Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {bestsellers.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            >
+              {/* Bestseller Badge */}
+              <div className="absolute top-3 left-3 z-10 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                {product.badge}
+              </div>
+
+              {/* Product Image */}
+              <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
+                <Image
+                  src={`https://res.cloudinary.com/dk1ovmxuj/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${product.publicId}.jpg`}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  quality={85}
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-4">
+                {/* Title */}
+                <h3 className="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-emerald-600 transition-colors">
+                  {product.name}
+                </h3>
+
+                {/* Rating */}
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={`text-xs ${
+                          i < Math.floor(product.rating)
+                            ? 'text-yellow-400'
+                            : 'text-gray-300'
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-gray-600">
+                    ({product.reviews})
+                  </span>
+                </div>
+
+                {/* Price */}
+                <div className="flex items-center gap-2 mt-3">
+                  <span className="text-lg font-bold text-gray-900">
+                    ₹{product.price.toLocaleString()}
+                  </span>
+                  <span className="text-sm text-gray-500 line-through">
+                    ₹{product.originalPrice.toLocaleString()}
+                  </span>
+                </div>
+
+                {/* Add to Cart Button */}
+                <button className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition-colors duration-300">
+                  Add to Cart
+                </button>
+
+                {/* Trust Badges */}
+                <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-gray-200">
+                  <div className="flex items-center gap-1.5 text-xs text-gray-700">
+                    <span className="text-green-600 font-bold">✓</span>
+                    <span>Secure</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-gray-700">
+                    <span className="text-green-600 font-bold">✓</span>
+                    <span>COD</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-gray-700">
+                    <span className="text-green-600 font-bold">✓</span>
+                    <span>3–5 Days</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-gray-700">
+                    <span className="text-green-600 font-bold">✓</span>
+                    <span>Returns</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center mt-12 sm:mt-16 md:mt-20"
+        >
+          <Link href="/all-products">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base tracking-wider font-medium transition-all duration-300 border-2"
+              style={{ borderColor: COLORS.deepTeal, color: COLORS.deepTeal }}
+            >
+              View All Products
+            </motion.button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ========================================
+// 3B️⃣ SECTION 3B - CATEGORY TILES
+// ========================================
+/**
+ * Category Tiles Section
+ * 4 category cards: Gifting, Dining, Decor, Bed & Linen
+ * Simplified product discovery
+ */
+function CategoryTilesSection() {
+  const categories = [
+    {
+      name: 'Gifting Collections',
+      description: 'Curated gift sets for every occasion',
+      image: 'https://images.unsplash.com/photo-1513651179975-59663e0ac1ad?w=400&h=300&fit=crop',
+      link: '/collections/gifting',
+      color: '#E8B4B8',
+    },
+    {
+      name: 'Dining & Tableware',
+      description: 'Premium ceramic & serving pieces',
+      image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&h=300&fit=crop',
+      link: '/collections/ceramics',
+      color: '#D4C4A0',
+    },
+    {
+      name: 'Decor & Lighting',
+      description: 'Artisan crafted home accents',
+      image: 'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=400&h=300&fit=crop',
+      link: '/collections/lamps',
+      color: '#C9A84C',
+    },
+    {
+      name: 'Bed & Linen',
+      description: 'Luxurious organic bedsheets',
+      image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop',
+      link: '/collections/bedsheets',
+      color: '#A8C9C3',
+    },
+  ];
+
+  return (
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: 'white' }}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16 sm:mb-20 md:mb-28"
+        >
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4"
+            style={{ color: COLORS.charcoal }}
+          >
+            Shop by Category
+          </h2>
+          <p className="text-sm md:text-base" style={{ color: COLORS.charcoal }}>
+            Browse our curated collections
+          </p>
+        </motion.div>
+
+        {/* Category Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((category, index) => (
+            <Link href={category.link} key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, translateY: -10 }}
+                className="group relative overflow-hidden rounded-lg cursor-pointer h-48 sm:h-56 shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                {/* Background Image */}
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  quality={85}
+                />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold" style={{ color: COLORS.ivory }}>
+                    {category.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm mt-1 opacity-90" style={{ color: COLORS.ivory }}>
+                    {category.description}
+                  </p>
+                  <motion.span
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className="inline-block text-xs font-medium tracking-wider mt-4 opacity-75"
+                    style={{ color: COLORS.gold }}
+                  >
+                    EXPLORE →
+                  </motion.span>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ========================================
+// 4️⃣ SECTION 4 - PHILOSOPHY BLOCK
 // ========================================
 /**
  * Philosophy Section
@@ -256,7 +614,7 @@ function PhilosophySection() {
 }
 
 // ========================================
-// 4️⃣ SECTION 4 - CURATED COLLECTIONS
+// 5️⃣ SECTION 5 - CURATED COLLECTIONS
 // ========================================
 /**
  * Editorial Collections Block
@@ -299,21 +657,21 @@ function CuratedCollectionsSection() {
       {/* Collection 2: The Art of Hosting */}
       <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden group">
         <Image
-          src="https://images.unsplash.com/photo-1551632786-de41ec802fcb?w=1600&h=1200&fit=crop"
-          alt="Elegant dining table setting"
+          src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1600&h=1200&fit=crop"
+          alt="Elegant dining setup with artisan ceramics"
           fill
           className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
           quality={85}
         />
-        
+
         {/* Subtle overlay */}
         <div className="absolute inset-0 bg-black/10" />
-        
+
         {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="absolute inset-0 flex flex-col justify-center items-end px-6 sm:px-12 md:px-16 lg:px-20 text-right"
         >
@@ -321,7 +679,7 @@ function CuratedCollectionsSection() {
             The Art of Hosting
           </h2>
           <Link href="/collections/ceramics" className="mt-6 px-8 py-3 transition-all duration-300 text-sm tracking-widest font-medium hover:opacity-80" style={{ backgroundColor: COLORS.gold, color: COLORS.deepTeal }}>
-            Explore Dining & Serving →
+            ← Explore Dining & Tableware
           </Link>
         </motion.div>
       </section>
@@ -330,7 +688,7 @@ function CuratedCollectionsSection() {
 }
 
 // ========================================
-// 5️⃣ SECTION 5 - SIGNATURE PIECES
+// 6️⃣ SECTION 6 - SIGNATURE PIECES
 // ========================================
 /**
  * Signature Products Grid
@@ -459,7 +817,142 @@ function SignaturePiecesSection() {
 }
 
 // ========================================
-// 6️⃣ SECTION 6 - CRAFT STORY STRIP
+// 6️⃣ SECTION 6 - SOCIAL PROOF
+// ========================================
+/**
+ * Social Proof Section
+ * Customer testimonials, ratings, and trust metrics
+ */
+function SocialProofSection() {
+  const testimonials = [
+    {
+      name: 'Priya Sharma',
+      location: 'Mumbai',
+      rating: 5,
+      text: 'The quality is exceptional. Every piece feels like an investment in my home\'s beauty. Highly recommended!',
+      avatar: '👩‍🦱',
+    },
+    {
+      name: 'Amit Kumar',
+      location: 'Bangalore',
+      rating: 5,
+      text: 'Outstanding craftsmanship. The bedsheets feel like sleeping in luxury. Customer service was prompt too!',
+      avatar: '👨‍💼',
+    },
+    {
+      name: 'Neha Patel',
+      location: 'Pune',
+      rating: 5,
+      text: 'I gift these pieces to friends regularly. They always appreciate the authentic Indian artistry and quality.',
+      avatar: '👩‍🦰',
+    },
+    {
+      name: 'Rohan Singh',
+      location: 'Delhi',
+      rating: 5,
+      text: 'Worth every penny. The attention to detail is remarkable. My home looks more elegant now!',
+      avatar: '👨‍🎤',
+    },
+  ];
+
+  const stats = [
+    { number: '500+', label: 'Happy Homes' },
+    { number: '4.8★', label: 'Average Rating' },
+    { number: '1000+', label: 'Reviews' },
+    { number: '100%', label: 'Authentic' },
+  ];
+
+  return (
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: COLORS.ivory }}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-16 sm:mb-20 md:mb-28 text-center"
+        >
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4"
+            style={{ color: COLORS.charcoal }}
+          >
+            Loved by Hundreds of Homes
+          </h2>
+          <p className="text-sm md:text-base" style={{ color: COLORS.charcoal }}>
+            Read what our customers have to say about their Radhika's experience
+          </p>
+        </motion.div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 md:mb-24">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center p-6"
+            >
+              <h3 
+                className="text-3xl sm:text-4xl font-bold mb-2"
+                style={{ color: COLORS.deepTeal }}
+              >
+                {stat.number}
+              </h3>
+              <p className="text-sm" style={{ color: COLORS.charcoal }}>
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">★</span>
+                ))}
+              </div>
+
+              {/* Review Text */}
+              <p className="text-sm text-gray-700 mb-4 italic">
+                "{testimonial.text}"
+              </p>
+
+              {/* Customer Info */}
+              <div className="flex items-center gap-3">
+                <div className="text-3xl">{testimonial.avatar}</div>
+                <div>
+                  <h4 className="font-semibold text-sm" style={{ color: COLORS.charcoal }}>
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-xs text-gray-600">
+                    {testimonial.location}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ========================================
+// 7️⃣ SECTION 7 - CRAFT STORY STRIP
 // ========================================
 /**
  * Craft Story Strip
@@ -769,45 +1262,60 @@ function Footer() {
 // MAIN HOMEPAGE
 // ========================================
 /**
- * Luxury Homepage - 9 Sections
- * 1. Navigation
+ * Luxury Homepage - 12 Sections
+ * 1. Navigation + Announcement Bar + WhatsApp
  * 2. Hero Section
- * 3. Philosophy Block
- * 4. Curated Collections
- * 5. Signature Pieces
- * 6. Craft Story Strip
- * 7. Visit Store Section
- * 8. Trust Strip
- * 9. Footer
+ * 3. Bestsellers (Above Fold)
+ * 4. Category Tiles
+ * 5. Philosophy Block
+ * 6. Curated Collections
+ * 7. Signature Pieces
+ * 8. Social Proof
+ * 9. Craft Story Strip
+ * 10. Visit Store Section
+ * 11. Trust Strip
+ * 12. Footer
  */
 export default function HomePage() {
   return (
     <div className="w-full overflow-hidden" style={{ backgroundColor: 'white' }}>
+      {/* 0️⃣ Announcement Bar & WhatsApp Chat */}
+      <AnnouncementBar />
+
       {/* 1️⃣ Navigation */}
       <Navigation />
 
       {/* 2️⃣ Hero Section */}
       <HeroSection />
 
-      {/* 3️⃣ Philosophy Block */}
+      {/* 3️⃣ Bestsellers (Above Fold) */}
+      <BestsellersSection />
+
+      {/* 3B️⃣ Category Tiles */}
+      <CategoryTilesSection />
+
+      {/* 4️⃣ Philosophy Block */}
       <PhilosophySection />
 
-      {/* 4️⃣ Curated Collections */}
+      {/* 5️⃣ Curated Collections */}
       <CuratedCollectionsSection />
 
-      {/* 5️⃣ Signature Pieces */}
+      {/* 6️⃣ Signature Pieces */}
       <SignaturePiecesSection />
 
-      {/* 6️⃣ Craft Story Strip */}
+      {/* 7️⃣ Social Proof */}
+      <SocialProofSection />
+
+      {/* 8️⃣ Craft Story Strip */}
       <CraftStorySection />
 
-      {/* 7️⃣ Visit Store Section */}
+      {/* 9️⃣ Visit Store Section */}
       <VisitStoreSection />
 
-      {/* 8️⃣ Trust Strip */}
+      {/* 🔟 Trust Strip */}
       <TrustStripSection />
 
-      {/* 9️⃣ Footer */}
+      {/* 1️⃣1️⃣ Footer */}
       <Footer />
     </div>
   );

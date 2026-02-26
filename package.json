@@ -15,7 +15,14 @@
     "db:seed": "node prisma/seed.ts",
     "db:studio": "prisma studio",
     "type-check": "tsc --noEmit",
-    "optimize-images": "node scripts/optimize-images.js"
+    "optimize-images": "node scripts/optimize-images.js",
+    "cloudinary": "ts-node scripts/cloudinary-cli.ts",
+    "cloudinary:inventory": "ts-node scripts/cloudinary-cli.ts inventory",
+    "cloudinary:recent": "ts-node scripts/cloudinary-cli.ts recent",
+    "cloudinary:organize": "ts-node scripts/cloudinary-cli.ts organize",
+    "cloudinary:report": "ts-node scripts/cloudinary-cli.ts report",
+    "cloudinary:sync": "ts-node scripts/sync-cloudinary.ts",
+    "sync:bulk-products": "tsx scripts/bulk-sync-products.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -33,12 +40,14 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
+    "dotenv": "^17.3.1",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.563.0",
     "next": "^14.0.3",
     "next-auth": "^4.24.13",
+    "next-cloudinary": "^6.17.5",
     "next-image-export-optimizer": "^1.17.1",
     "nodemailer": "^7.0.0",
     "postcss": "^8.5.6",
@@ -80,7 +89,9 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
-    "prettier-plugin-tailwindcss": "^0.5.11"
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0"
   },
   "engines": {
     "node": "18.x || 20.x"
