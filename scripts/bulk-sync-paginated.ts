@@ -15,7 +15,6 @@ dotenv.config({ path: path.join(__dirname, '../.env.local') });
 
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
-import fs from 'fs/promises';
 
 const prisma = new PrismaClient();
 
@@ -49,12 +48,17 @@ async function fetchImagesWithPagination() {
     while (true) {
       console.log(`   Batch ${batchNum}: Fetching ${BATCH_SIZE} images...`);
       
-      const params = new URLSearchParams({
+      const paramsObj: Record<string, string> = {
         type: 'upload',
         max_results: BATCH_SIZE.toString(),
         direction: 'desc',
-        ...(nextCursor && { next_cursor: nextCursor }),
-      });
+      };
+      
+      if (nextCursor) {
+        paramsObj.next_cursor = nextCursor;
+      }
+      
+      const params = new URLSearchParams(paramsObj);
 
       const url = `${CLOUDINARY_API}/${CLOUD_NAME}/resources/image?${params}`;
       

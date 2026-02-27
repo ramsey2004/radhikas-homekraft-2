@@ -4,7 +4,6 @@
  */
 
 import axios from 'axios';
-import { createHash } from 'crypto';
 
 const CLOUDINARY_API = 'https://api.cloudinary.com/v1_1';
 const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dk1ovmxuj';
@@ -16,7 +15,7 @@ function getCredentials() {
   return { apiKey, apiSecret };
 }
 
-interface CloudinaryResource {
+export interface CloudinaryResource {
   public_id: string;
   format: string;
   width: number;

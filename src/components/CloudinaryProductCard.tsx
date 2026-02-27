@@ -156,3 +156,6 @@ export default function CloudinaryProductCard({
           </div>
         </div>
       </div>
+    </div>
+  );
+}
