@@ -1,0 +1,14 @@
+{
+  "startedAt": "2026-02-27T18:55:05.444Z",
+  "status": "completed",
+  "productsCreated": 0,
+  "duration": 700,
+  "steps": [
+    {
+      "name": "generate-products",
+      "status": "completed",
+      "duration": 699
+    }
+  ],
+  "completedAt": "2026-02-27T18:55:06.144Z"
+}

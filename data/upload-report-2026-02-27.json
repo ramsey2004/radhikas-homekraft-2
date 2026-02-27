@@ -1,0 +1,131 @@
+{
+  "totalRequested": 30,
+  "successfulUploads": 0,
+  "failedUploads": 30,
+  "uploadedImages": [],
+  "errors": [
+    {
+      "name": "Image 1",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 2",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 3",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 4",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 5",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 6",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 7",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 8",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 9",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 10",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 11",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 12",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 13",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 14",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 15",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 16",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 17",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 18",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 19",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 20",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 21",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 22",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 23",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 24",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 25",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 26",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 27",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 28",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 29",
+      "error": "Upload failed: Request failed with status code 400"
+    },
+    {
+      "name": "Image 30",
+      "error": "Upload failed: Request failed with status code 400"
+    }
+  ],
+  "startedAt": "2026-02-27T18:52:11.443Z",
+  "completedAt": "2026-02-27T18:53:09.706Z",
+  "duration": 58263
+}

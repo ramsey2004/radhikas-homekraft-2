@@ -1,0 +1,23 @@
+{
+  "startedAt": "2026-02-27T18:52:10.791Z",
+  "steps": [
+    {
+      "name": "upload-images",
+      "status": "failed",
+      "duration": 58938,
+      "error": "Process exited with code 1"
+    },
+    {
+      "name": "create-products",
+      "status": "pending",
+      "duration": 0
+    },
+    {
+      "name": "sync-inventory",
+      "status": "pending",
+      "duration": 0
+    }
+  ],
+  "overallStatus": "failed",
+  "completedAt": "2026-02-27T18:53:09.731Z"
+}
